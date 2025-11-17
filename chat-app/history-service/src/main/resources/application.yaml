@@ -1,0 +1,5 @@
+spring:
+  application:
+    name: history-service
+server:
+  port: 9200
