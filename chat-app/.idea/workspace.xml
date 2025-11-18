@@ -4,67 +4,15 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d3ee033f-53e4-48ed-9ed9-ec8adaf42bb1" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/../.idea/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../.idea/compiler.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../.idea/encodings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../.idea/jarRepositories.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/jarRepositories.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/common/pom.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/common/src/main/java/com/example/common/model/ChatMessage.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/common/src/main/java/com/example/common/model/MessageType.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/gateway/.gitattributes" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/gateway/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/gateway/.mvn/wrapper/maven-wrapper.properties" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/gateway/mvnw" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/gateway/mvnw.cmd" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/gateway/pom.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/gateway/src/main/java/com/example/gateway/GatewayApplication.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/gateway/src/main/java/com/example/gateway/config/RabbitConfig.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/gateway/src/main/java/com/example/gateway/config/WebSocketConfig.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/gateway/src/main/java/com/example/gateway/rabbit/RabbitService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/gateway/src/main/java/com/example/gateway/websocket/ChatWebSocketHandler.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/gateway/src/main/java/com/example/gateway/websocket/SessionRegistry.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/gateway/src/main/resources/application.yaml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/gateway/src/test/java/com/example/gateway/GatewayApplicationTests.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/history-service/.gitattributes" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/history-service/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/history-service/.mvn/wrapper/maven-wrapper.properties" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/history-service/mvnw" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/history-service/mvnw.cmd" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/history-service/pom.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/history-service/src/main/java/com/example/history_service/DTO/MessageEntity.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/history-service/src/main/java/com/example/history_service/DTO/MessageMapper.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/history-service/src/main/java/com/example/history_service/HistoryServiceApplication.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/history-service/src/main/java/com/example/history_service/config/JacksonConfig.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/history-service/src/main/java/com/example/history_service/config/RabbitConfig.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/history-service/src/main/java/com/example/history_service/config/WebConfig.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/history-service/src/main/java/com/example/history_service/history/HistoryController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/history-service/src/main/java/com/example/history_service/history/MessageRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/history-service/src/main/java/com/example/history_service/rabbit/RabbitService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/history-service/src/main/resources/application.yaml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/history-service/src/test/java/com/example/history_service/HistoryServiceApplicationTests.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/infra/docker-compose.yml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/message-service/.gitattributes" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/message-service/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/message-service/.mvn/wrapper/maven-wrapper.properties" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/message-service/mvnw" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/message-service/mvnw.cmd" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/message-service/pom.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/message-service/src/main/java/com/example/message_service/MessageServiceApplication.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/message-service/src/main/java/com/example/message_service/config/RabbitmqConfig.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/message-service/src/main/java/com/example/message_service/rabbit/RabbitService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/message-service/src/main/resources/application.yaml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/message-service/src/test/java/com/example/message_service/MessageServiceApplicationTests.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+    <list default="true" id="d3ee033f-53e4-48ed-9ed9-ec8adaf42bb1" name="Changes" comment="Simple client for testing.">
+      <change afterPath="$PROJECT_DIR$/user-service/src/main/java/com/example/user_service/UserRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/user-service/src/main/java/com/example/user_service/controller/UserController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/user-service/src/main/java/com/example/user_service/model/Room.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/user-service/src/main/java/com/example/user_service/model/User.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/user-service/src/main/resources/schema.sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/user-service/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/user-service/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/user-service/src/main/resources/application.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/user-service/src/main/resources/application.yaml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -80,8 +28,25 @@
     </option>
   </component>
   <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$/.." value="master" />
+      </map>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
+  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
+  "lastFilter": {
+    "state": "OPEN",
+    "assignee": "Kierznowski"
+  }
+}]]></component>
+  <component name="GithubPullRequestsUISettings"><![CDATA[{
+  "selectedUrlAndAccountId": {
+    "url": "https://github.com/Kierznowski/reactive-chat.git",
+    "accountId": "125f54a4-0d31-4bab-aaee-f1e197bb37aa"
+  }
+}]]></component>
   <component name="ProjectColorInfo">{
   &quot;customColor&quot;: &quot;&quot;,
   &quot;associatedIndex&quot;: 5
@@ -97,11 +62,12 @@
     "Application.GatewayApplication.executor": "Run",
     "Application.HistoryServiceApplication.executor": "Run",
     "Application.MessageServiceApplication.executor": "Run",
+    "Application.UserServiceApplication.executor": "Run",
     "ModuleVcsDetector.initialDetectionPerformed": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
     "RunOnceActivity.git.unshallow": "true",
-    "git-widget-placeholder": "master",
+    "git-widget-placeholder": "feat/user-management",
     "kotlin-language-version-configured": "true",
     "last_opened_file_path": "/home/kierznowski/Pulpit/PersonalCS/projects/Reactive_communicator/chat-app"
   }
@@ -176,6 +142,28 @@
       <option name="presentableId" value="Default" />
       <updated>1763114321285</updated>
     </task>
+    <task id="LOCAL-00001" summary="init">
+      <option name="closed" value="true" />
+      <created>1763390968879</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1763390968879</updated>
+    </task>
+    <task id="LOCAL-00002" summary="Simple client for testing.">
+      <option name="closed" value="true" />
+      <created>1763391056820</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1763391056820</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="init" />
+    <MESSAGE value="Simple client for testing." />
+    <option name="LAST_COMMIT_MESSAGE" value="Simple client for testing." />
   </component>
 </project>

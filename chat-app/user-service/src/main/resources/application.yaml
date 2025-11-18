@@ -1,5 +1,11 @@
 spring:
-  application:
+  r2dbc:
+    url: r2dbc:h2:mem:///users_db;DB_CLOSE_DELAY=-1;MODE=PostgreSQL
+    username: sa
+    password: ""
+  sql:
+    init:
+      mode: always
 
 server:
   port: 9300
