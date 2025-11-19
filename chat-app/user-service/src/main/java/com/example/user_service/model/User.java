@@ -1,13 +1,22 @@
 package com.example.user_service.model;
 
-import org.springframework.data.annotation.Id;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
 
 import java.util.List;
 
+@Entity(name = "chat_user")
+@AllArgsConstructor
+@NoArgsConstructor(access = AccessLevel.PRIVATE, force = true)
 public class User {
-
     @Id
-    String id;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    Long id;
     String email;
     String passwordHash;
     List<String> roomIds;
