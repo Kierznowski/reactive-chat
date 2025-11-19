@@ -4,18 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d3ee033f-53e4-48ed-9ed9-ec8adaf42bb1" name="Changes" comment="User-service init and r2dbc for users / romms.">
-      <change afterPath="$PROJECT_DIR$/gateway/src/main/java/com/example/gateway/config/Config.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/user-service/src/main/java/com/example/user_service/config/SecurityConfig.java" afterDir="false" />
+    <list default="true" id="d3ee033f-53e4-48ed-9ed9-ec8adaf42bb1" name="Changes" comment="Simple client for testing.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/common/target/classes/com/example/common/model/MessageType.class" beforeDir="false" afterPath="$PROJECT_DIR$/common/target/classes/com/example/common/model/MessageType.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gateway/src/main/java/com/example/gateway/GatewayApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/gateway/src/main/java/com/example/gateway/GatewayApplication.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/user-service/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/user-service/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/user-service/src/main/java/com/example/user_service/UserRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/user-service/src/main/java/com/example/user_service/UserRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/user-service/src/main/java/com/example/user_service/controller/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/user-service/src/main/java/com/example/user_service/controller/UserController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/user-service/src/main/java/com/example/user_service/model/Room.java" beforeDir="false" afterPath="$PROJECT_DIR$/user-service/src/main/java/com/example/user_service/model/Room.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/user-service/src/main/java/com/example/user_service/model/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/user-service/src/main/java/com/example/user_service/model/User.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/user-service/src/main/resources/schema.sql" beforeDir="false" afterPath="$PROJECT_DIR$/user-service/src/main/resources/schema.sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/history-service/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/history-service/pom.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -131,9 +122,9 @@
     <recent_temporary>
       <list>
         <item itemvalue="Application.UserServiceApplication" />
-        <item itemvalue="Application.GatewayApplication" />
         <item itemvalue="Application.MessageServiceApplication" />
         <item itemvalue="Application.HistoryServiceApplication" />
+        <item itemvalue="Application.GatewayApplication" />
         <item itemvalue="Application.UserServiceApplication" />
       </list>
     </recent_temporary>
