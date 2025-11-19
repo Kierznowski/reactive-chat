@@ -5,14 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d3ee033f-53e4-48ed-9ed9-ec8adaf42bb1" name="Changes" comment="Simple client for testing.">
-      <change afterPath="$PROJECT_DIR$/user-service/src/main/java/com/example/user_service/UserRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/user-service/src/main/java/com/example/user_service/controller/UserController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/user-service/src/main/java/com/example/user_service/model/Room.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/user-service/src/main/java/com/example/user_service/model/User.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/user-service/src/main/resources/schema.sql" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/user-service/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/user-service/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/user-service/src/main/resources/application.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/user-service/src/main/resources/application.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/history-service/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/history-service/pom.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -35,18 +29,18 @@
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
-  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
-  "lastFilter": {
-    "state": "OPEN",
-    "assignee": "Kierznowski"
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;Kierznowski&quot;
   }
-}]]></component>
-  <component name="GithubPullRequestsUISettings"><![CDATA[{
-  "selectedUrlAndAccountId": {
-    "url": "https://github.com/Kierznowski/reactive-chat.git",
-    "accountId": "125f54a4-0d31-4bab-aaee-f1e197bb37aa"
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/Kierznowski/reactive-chat.git&quot;,
+    &quot;accountId&quot;: &quot;125f54a4-0d31-4bab-aaee-f1e197bb37aa&quot;
   }
-}]]></component>
+}</component>
   <component name="ProjectColorInfo">{
   &quot;customColor&quot;: &quot;&quot;,
   &quot;associatedIndex&quot;: 5
@@ -67,7 +61,7 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
     "RunOnceActivity.git.unshallow": "true",
-    "git-widget-placeholder": "feat/user-management",
+    "git-widget-placeholder": "feat/authorization-server",
     "kotlin-language-version-configured": "true",
     "last_opened_file_path": "/home/kierznowski/Pulpit/PersonalCS/projects/Reactive_communicator/chat-app"
   }
@@ -128,9 +122,10 @@
     <recent_temporary>
       <list>
         <item itemvalue="Application.UserServiceApplication" />
+        <item itemvalue="Application.MessageServiceApplication" />
         <item itemvalue="Application.HistoryServiceApplication" />
         <item itemvalue="Application.GatewayApplication" />
-        <item itemvalue="Application.MessageServiceApplication" />
+        <item itemvalue="Application.UserServiceApplication" />
       </list>
     </recent_temporary>
   </component>

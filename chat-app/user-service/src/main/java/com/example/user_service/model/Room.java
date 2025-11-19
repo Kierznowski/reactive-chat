@@ -1,16 +1,23 @@
 package com.example.user_service.model;
 
-import org.springframework.data.annotation.Id;
-import org.springframework.data.relational.core.mapping.Table;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
 
 import java.util.List;
-import java.util.UUID;
 
-@Table("chat_room")
+@Entity(name = "chat_room")
+@AllArgsConstructor
+@NoArgsConstructor(access = AccessLevel.PRIVATE, force = true)
 public class Room {
 
     @Id
-    UUID id;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    Long id;
     String name;
     String ownerId;
     List<String> memberIds;
