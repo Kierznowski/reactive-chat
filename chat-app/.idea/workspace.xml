@@ -4,9 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d3ee033f-53e4-48ed-9ed9-ec8adaf42bb1" name="Changes" comment="Simple client for testing.">
+    <list default="true" id="d3ee033f-53e4-48ed-9ed9-ec8adaf42bb1" name="Changes" comment="Basic authorization server with non-opaque tokens.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/history-service/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/history-service/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/history-service/src/main/java/com/example/history_service/config/WebConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/history-service/src/main/java/com/example/history_service/config/ProjectConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/history-service/src/main/resources/application.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/history-service/src/main/resources/application.yaml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -61,12 +62,12 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
     "RunOnceActivity.git.unshallow": "true",
-    "git-widget-placeholder": "feat/authorization-server",
+    "git-widget-placeholder": "feat/resource-server-on-history-service",
     "kotlin-language-version-configured": "true",
     "last_opened_file_path": "/home/kierznowski/Pulpit/PersonalCS/projects/Reactive_communicator/chat-app"
   }
 }]]></component>
-  <component name="RunManager" selected="Application.UserServiceApplication">
+  <component name="RunManager" selected="Application.MessageServiceApplication">
     <configuration name="GatewayApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.example.gateway.GatewayApplication" />
       <module name="gateway" />
@@ -121,10 +122,10 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.UserServiceApplication" />
         <item itemvalue="Application.MessageServiceApplication" />
-        <item itemvalue="Application.HistoryServiceApplication" />
         <item itemvalue="Application.GatewayApplication" />
+        <item itemvalue="Application.HistoryServiceApplication" />
+        <item itemvalue="Application.UserServiceApplication" />
         <item itemvalue="Application.UserServiceApplication" />
       </list>
     </recent_temporary>
@@ -153,12 +154,21 @@
       <option name="project" value="LOCAL" />
       <updated>1763391056820</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="Basic authorization server with non-opaque tokens.">
+      <option name="closed" value="true" />
+      <created>1763563808328</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1763563808328</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="init" />
     <MESSAGE value="Simple client for testing." />
-    <option name="LAST_COMMIT_MESSAGE" value="Simple client for testing." />
+    <MESSAGE value="Basic authorization server with non-opaque tokens." />
+    <option name="LAST_COMMIT_MESSAGE" value="Basic authorization server with non-opaque tokens." />
   </component>
 </project>

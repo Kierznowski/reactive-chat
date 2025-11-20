@@ -3,3 +3,6 @@ spring:
     name: history-service
 server:
   port: 9200
+
+keySetURI: http://localhost:9300/oauth2/jwks
+
