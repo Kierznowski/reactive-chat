@@ -1,4 +1,4 @@
-package com.example.user_service.config;
+package com.example.auth_server.config;
 
 import com.nimbusds.jose.jwk.JWKSet;
 import com.nimbusds.jose.jwk.RSAKey;

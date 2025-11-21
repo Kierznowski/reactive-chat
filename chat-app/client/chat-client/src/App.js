@@ -1,22 +1,46 @@
-import { useState } from "react";
-import Login from "./components/Login";
-import ChatRoom from "./components/ChatRoom";
+import { useEffect, useState } from "react";
+import RoomList from "./components/RoomList";
 
 export default function App() {
-  const [user, setUser] = useState(null);
+  const [auth, setAuth] = useState(null);
+  useEffect(() => {
+    checkAuth().then(data => {
+      console.log("Auth:", data);
+      setAuth(data.authenticated);
+    });
+  }, []);
+  
+  async function checkAuth() {
+    const res = await fetch("http://localhost:9000/gateway/auth/status", {
+      credentials: "include"
+    });
 
-  const join = (userId, roomId) => {
-    setUser({ userId, roomId });
+    if (!res.ok) {
+      throw new Error("Request failed");
+    }
+
+    return await res.json();
   }
 
+
+  if (auth === null) return <div>Loading...</div>
+
   return (
-    <div>
-      {user ? (
-        <ChatRoom userId={user.userId} roomId={user.roomId} />
-      ) : (
-        <Login onJoin={join} />
-      )
-    }
-    </div>
+    auth ? 
+    (
+      <div>
+        <RoomList />
+      </div>
+    ) :
+    (
+      <div>
+        <h1>You are not logged in</h1>
+        <button onClick={() => 
+          window.location.href = "http://localhost:9000/oauth2/authorization/chat_auth_server"
+        }>
+          Zaloguj
+        </ button>
+      </div>
+    )
   );
 }

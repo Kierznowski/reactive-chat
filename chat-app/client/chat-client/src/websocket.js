@@ -1,6 +1,8 @@
 let socket;
 
 export function connect(userId, roomId, onMessage) {
+    if(socket && socket.readyState === WebSocket.OPEN) return;
+
     socket = new WebSocket("ws://localhost:9000/chat-message");
 
     socket.onopen = () => {
@@ -12,7 +14,11 @@ export function connect(userId, roomId, onMessage) {
     };
 
     socket.onmessage = event => {
-        onMessage(JSON.parse(event.data));
+        try {
+            onMessage(JSON.parse(event.data));
+        } catch(e) {
+            console.error("Invalid ws message:", e);
+        }
     };
 }
 

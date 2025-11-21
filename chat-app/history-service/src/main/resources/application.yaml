@@ -4,5 +4,5 @@ spring:
 server:
   port: 9200
 
-keySetURI: http://localhost:9300/oauth2/jwks
+keySetURI: http://localhost:8000/oauth2/jwks
 

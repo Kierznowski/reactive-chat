@@ -16,4 +16,15 @@ public class MessageMapper {
                 chatMessage.getTimestamp()
         );
     }
+
+    public ChatMessage fromEntity(MessageEntity entity) {
+        return new ChatMessage(
+            entity.getId(),
+                entity.getType(),
+                entity.getRoomId(),
+                entity.getSenderId(),
+                entity.getContent(),
+                entity.getTimestamp()
+        );
+    }
 }

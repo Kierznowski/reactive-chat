@@ -1,11 +1,11 @@
 spring:
   r2dbc:
     url: r2dbc:h2:mem:///users_db;DB_CLOSE_DELAY=-1;MODE=PostgreSQL
-    username: chat-admin
+    username: sa
     password: ""
   sql:
     init:
       mode: always
 
 server:
-  port: 9300
+  port: 8000
