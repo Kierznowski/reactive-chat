@@ -12,6 +12,7 @@
         <module name="common" />
         <module name="message-service" />
         <module name="gateway" />
+        <module name="auth-server" />
       </profile>
     </annotationProcessing>
   </component>

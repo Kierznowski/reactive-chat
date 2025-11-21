@@ -1,0 +1,122 @@
+Index: history-service/pom.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<project xmlns=\"http://maven.apache.org/POM/4.0.0\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"\n\txsi:schemaLocation=\"http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd\">\n\t<modelVersion>4.0.0</modelVersion>\n\t<parent>\n\t\t<groupId>com.example</groupId>\n\t\t<artifactId>chat-app</artifactId>\n\t\t<version>1.0.0</version>\n\t\t<relativePath/> <!-- lookup parent from repository -->\n\t</parent>\n\t<artifactId>history-service</artifactId>\n\n\t<dependencies>\n        <dependency>\n            <groupId>com.example</groupId>\n            <artifactId>common</artifactId>\n            <version>1.0.0</version>\n        </dependency>\n\t\t<dependency>\n\t\t\t<groupId>org.springframework.boot</groupId>\n\t\t\t<artifactId>spring-boot-starter-actuator</artifactId>\n\t\t</dependency>\n\t\t<dependency>\n\t\t\t<groupId>org.springframework.boot</groupId>\n\t\t\t<artifactId>spring-boot-starter-data-mongodb-reactive</artifactId>\n\t\t</dependency>\n\t\t<dependency>\n\t\t\t<groupId>org.springframework.boot</groupId>\n\t\t\t<artifactId>spring-boot-starter-webflux</artifactId>\n\t\t</dependency>\n        <dependency>\n            <groupId>io.projectreactor.rabbitmq</groupId>\n            <artifactId>reactor-rabbitmq</artifactId>\n            <version>1.5.6</version>\n        </dependency>\n\n\t\t<dependency>\n\t\t\t<groupId>org.springframework.boot</groupId>\n\t\t\t<artifactId>spring-boot-starter-test</artifactId>\n\t\t\t<scope>test</scope>\n\t\t</dependency>\n\t\t<dependency>\n\t\t\t<groupId>io.projectreactor</groupId>\n\t\t\t<artifactId>reactor-test</artifactId>\n\t\t\t<scope>test</scope>\n\t\t</dependency>\n\t</dependencies>\n\n\t<build>\n\t\t<plugins>\n\t\t\t<plugin>\n\t\t\t\t<groupId>org.springframework.boot</groupId>\n\t\t\t\t<artifactId>spring-boot-maven-plugin</artifactId>\n\t\t\t</plugin>\n\t\t</plugins>\n\t</build>\n\n</project>\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/history-service/pom.xml b/history-service/pom.xml
+--- a/history-service/pom.xml	(revision 8f8e1a8c82f6928c6704d49688be2577f68c2636)
++++ b/history-service/pom.xml	(date 1763563266319)
+@@ -34,6 +34,16 @@
+             <version>1.5.6</version>
+         </dependency>
+ 
++        <!-- SECURITY -->
++        <dependency>
++            <groupId>org.springframework.boot</groupId>
++            <artifactId>spring-boot-starter-oauth2-resource-server</artifactId>
++        </dependency>
++        <dependency>
++            <groupId>org.springframework.boot</groupId>
++            <artifactId>spring-boot-starter-security</artifactId>
++        </dependency>
++
+ 		<dependency>
+ 			<groupId>org.springframework.boot</groupId>
+ 			<artifactId>spring-boot-starter-test</artifactId>
+Index: .idea/workspace.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<project version=\"4\">\n  <component name=\"AutoImportSettings\">\n    <option name=\"autoReloadType\" value=\"SELECTIVE\" />\n  </component>\n  <component name=\"ChangeListManager\">\n    <list default=\"true\" id=\"d3ee033f-53e4-48ed-9ed9-ec8adaf42bb1\" name=\"Changes\" comment=\"Simple client for testing.\">\n      <change afterPath=\"$PROJECT_DIR$/user-service/src/main/java/com/example/user_service/UserRepository.java\" afterDir=\"false\" />\n      <change afterPath=\"$PROJECT_DIR$/user-service/src/main/java/com/example/user_service/controller/UserController.java\" afterDir=\"false\" />\n      <change afterPath=\"$PROJECT_DIR$/user-service/src/main/java/com/example/user_service/model/Room.java\" afterDir=\"false\" />\n      <change afterPath=\"$PROJECT_DIR$/user-service/src/main/java/com/example/user_service/model/User.java\" afterDir=\"false\" />\n      <change afterPath=\"$PROJECT_DIR$/user-service/src/main/resources/schema.sql\" afterDir=\"false\" />\n      <change beforePath=\"$PROJECT_DIR$/.idea/workspace.xml\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/.idea/workspace.xml\" afterDir=\"false\" />\n      <change beforePath=\"$PROJECT_DIR$/user-service/pom.xml\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/user-service/pom.xml\" afterDir=\"false\" />\n      <change beforePath=\"$PROJECT_DIR$/user-service/src/main/resources/application.yaml\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/user-service/src/main/resources/application.yaml\" afterDir=\"false\" />\n    </list>\n    <option name=\"SHOW_DIALOG\" value=\"false\" />\n    <option name=\"HIGHLIGHT_CONFLICTS\" value=\"true\" />\n    <option name=\"HIGHLIGHT_NON_ACTIVE_CHANGELIST\" value=\"false\" />\n    <option name=\"LAST_RESOLUTION\" value=\"IGNORE\" />\n  </component>\n  <component name=\"FileTemplateManagerImpl\">\n    <option name=\"RECENT_TEMPLATES\">\n      <list>\n        <option value=\"Enum\" />\n        <option value=\"Class\" />\n      </list>\n    </option>\n  </component>\n  <component name=\"Git.Settings\">\n    <option name=\"RECENT_BRANCH_BY_REPOSITORY\">\n      <map>\n        <entry key=\"$PROJECT_DIR$/..\" value=\"master\" />\n      </map>\n    </option>\n    <option name=\"RECENT_GIT_ROOT_PATH\" value=\"$PROJECT_DIR$/..\" />\n  </component>\n  <component name=\"GitHubPullRequestSearchHistory\"><![CDATA[{\n  \"lastFilter\": {\n    \"state\": \"OPEN\",\n    \"assignee\": \"Kierznowski\"\n  }\n}]]></component>\n  <component name=\"GithubPullRequestsUISettings\"><![CDATA[{\n  \"selectedUrlAndAccountId\": {\n    \"url\": \"https://github.com/Kierznowski/reactive-chat.git\",\n    \"accountId\": \"125f54a4-0d31-4bab-aaee-f1e197bb37aa\"\n  }\n}]]></component>\n  <component name=\"ProjectColorInfo\">{\n  &quot;customColor&quot;: &quot;&quot;,\n  &quot;associatedIndex&quot;: 5\n}</component>\n  <component name=\"ProjectId\" id=\"35SrTO2UcJH9DX1HyLcbXM46lAB\" />\n  <component name=\"ProjectViewState\">\n    <option name=\"hideEmptyMiddlePackages\" value=\"true\" />\n    <option name=\"showLibraryContents\" value=\"true\" />\n  </component>\n  <component name=\"PropertiesComponent\"><![CDATA[{\n  \"keyToString\": {\n    \"Application.Application.executor\": \"Run\",\n    \"Application.GatewayApplication.executor\": \"Run\",\n    \"Application.HistoryServiceApplication.executor\": \"Run\",\n    \"Application.MessageServiceApplication.executor\": \"Run\",\n    \"Application.UserServiceApplication.executor\": \"Run\",\n    \"ModuleVcsDetector.initialDetectionPerformed\": \"true\",\n    \"RunOnceActivity.ShowReadmeOnStart\": \"true\",\n    \"RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252\": \"true\",\n    \"RunOnceActivity.git.unshallow\": \"true\",\n    \"git-widget-placeholder\": \"feat/user-management\",\n    \"kotlin-language-version-configured\": \"true\",\n    \"last_opened_file_path\": \"/home/kierznowski/Pulpit/PersonalCS/projects/Reactive_communicator/chat-app\"\n  }\n}]]></component>\n  <component name=\"RunManager\" selected=\"Application.UserServiceApplication\">\n    <configuration name=\"GatewayApplication\" type=\"Application\" factoryName=\"Application\" temporary=\"true\" nameIsGenerated=\"true\">\n      <option name=\"MAIN_CLASS_NAME\" value=\"com.example.gateway.GatewayApplication\" />\n      <module name=\"gateway\" />\n      <extension name=\"coverage\">\n        <pattern>\n          <option name=\"PATTERN\" value=\"com.example.gateway.rabbit.*\" />\n          <option name=\"ENABLED\" value=\"true\" />\n        </pattern>\n      </extension>\n      <method v=\"2\">\n        <option name=\"Make\" enabled=\"true\" />\n      </method>\n    </configuration>\n    <configuration name=\"HistoryServiceApplication\" type=\"Application\" factoryName=\"Application\" temporary=\"true\" nameIsGenerated=\"true\">\n      <option name=\"MAIN_CLASS_NAME\" value=\"com.example.history_service.HistoryServiceApplication\" />\n      <module name=\"history-service\" />\n      <extension name=\"coverage\">\n        <pattern>\n          <option name=\"PATTERN\" value=\"com.example.history_service.*\" />\n          <option name=\"ENABLED\" value=\"true\" />\n        </pattern>\n      </extension>\n      <method v=\"2\">\n        <option name=\"Make\" enabled=\"true\" />\n      </method>\n    </configuration>\n    <configuration name=\"MessageServiceApplication\" type=\"Application\" factoryName=\"Application\" temporary=\"true\" nameIsGenerated=\"true\">\n      <option name=\"MAIN_CLASS_NAME\" value=\"com.example.message_service.MessageServiceApplication\" />\n      <module name=\"message-service\" />\n      <extension name=\"coverage\">\n        <pattern>\n          <option name=\"PATTERN\" value=\"com.example.message_service.rabbit.*\" />\n          <option name=\"ENABLED\" value=\"true\" />\n        </pattern>\n      </extension>\n      <method v=\"2\">\n        <option name=\"Make\" enabled=\"true\" />\n      </method>\n    </configuration>\n    <configuration name=\"UserServiceApplication\" type=\"Application\" factoryName=\"Application\" temporary=\"true\" nameIsGenerated=\"true\">\n      <option name=\"MAIN_CLASS_NAME\" value=\"com.example.user_service.UserServiceApplication\" />\n      <module name=\"user-service\" />\n      <extension name=\"coverage\">\n        <pattern>\n          <option name=\"PATTERN\" value=\"com.example.user_service.*\" />\n          <option name=\"ENABLED\" value=\"true\" />\n        </pattern>\n      </extension>\n      <method v=\"2\">\n        <option name=\"Make\" enabled=\"true\" />\n      </method>\n    </configuration>\n    <recent_temporary>\n      <list>\n        <item itemvalue=\"Application.UserServiceApplication\" />\n        <item itemvalue=\"Application.HistoryServiceApplication\" />\n        <item itemvalue=\"Application.GatewayApplication\" />\n        <item itemvalue=\"Application.MessageServiceApplication\" />\n      </list>\n    </recent_temporary>\n  </component>\n  <component name=\"TaskManager\">\n    <task active=\"true\" id=\"Default\" summary=\"Default task\">\n      <changelist id=\"d3ee033f-53e4-48ed-9ed9-ec8adaf42bb1\" name=\"Changes\" comment=\"\" />\n      <created>1763114321285</created>\n      <option name=\"number\" value=\"Default\" />\n      <option name=\"presentableId\" value=\"Default\" />\n      <updated>1763114321285</updated>\n    </task>\n    <task id=\"LOCAL-00001\" summary=\"init\">\n      <option name=\"closed\" value=\"true\" />\n      <created>1763390968879</created>\n      <option name=\"number\" value=\"00001\" />\n      <option name=\"presentableId\" value=\"LOCAL-00001\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1763390968879</updated>\n    </task>\n    <task id=\"LOCAL-00002\" summary=\"Simple client for testing.\">\n      <option name=\"closed\" value=\"true\" />\n      <created>1763391056820</created>\n      <option name=\"number\" value=\"00002\" />\n      <option name=\"presentableId\" value=\"LOCAL-00002\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1763391056820</updated>\n    </task>\n    <option name=\"localTasksCounter\" value=\"3\" />\n    <servers />\n  </component>\n  <component name=\"VcsManagerConfiguration\">\n    <MESSAGE value=\"init\" />\n    <MESSAGE value=\"Simple client for testing.\" />\n    <option name=\"LAST_COMMIT_MESSAGE\" value=\"Simple client for testing.\" />\n  </component>\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/workspace.xml b/.idea/workspace.xml
+--- a/.idea/workspace.xml	(revision 8f8e1a8c82f6928c6704d49688be2577f68c2636)
++++ b/.idea/workspace.xml	(date 1763563447482)
+@@ -5,14 +5,7 @@
+   </component>
+   <component name="ChangeListManager">
+     <list default="true" id="d3ee033f-53e4-48ed-9ed9-ec8adaf42bb1" name="Changes" comment="Simple client for testing.">
+-      <change afterPath="$PROJECT_DIR$/user-service/src/main/java/com/example/user_service/UserRepository.java" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/user-service/src/main/java/com/example/user_service/controller/UserController.java" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/user-service/src/main/java/com/example/user_service/model/Room.java" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/user-service/src/main/java/com/example/user_service/model/User.java" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/user-service/src/main/resources/schema.sql" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/user-service/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/user-service/pom.xml" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/user-service/src/main/resources/application.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/user-service/src/main/resources/application.yaml" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/history-service/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/history-service/pom.xml" afterDir="false" />
+     </list>
+     <option name="SHOW_DIALOG" value="false" />
+     <option name="HIGHLIGHT_CONFLICTS" value="true" />
+@@ -30,23 +23,23 @@
+   <component name="Git.Settings">
+     <option name="RECENT_BRANCH_BY_REPOSITORY">
+       <map>
+-        <entry key="$PROJECT_DIR$/.." value="master" />
++        <entry key="$PROJECT_DIR$/.." value="feat/authorization-server" />
+       </map>
+     </option>
+     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+   </component>
+-  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
+-  "lastFilter": {
+-    "state": "OPEN",
+-    "assignee": "Kierznowski"
++  <component name="GitHubPullRequestSearchHistory">{
++  &quot;lastFilter&quot;: {
++    &quot;state&quot;: &quot;OPEN&quot;,
++    &quot;assignee&quot;: &quot;Kierznowski&quot;
+   }
+-}]]></component>
+-  <component name="GithubPullRequestsUISettings"><![CDATA[{
+-  "selectedUrlAndAccountId": {
+-    "url": "https://github.com/Kierznowski/reactive-chat.git",
+-    "accountId": "125f54a4-0d31-4bab-aaee-f1e197bb37aa"
++}</component>
++  <component name="GithubPullRequestsUISettings">{
++  &quot;selectedUrlAndAccountId&quot;: {
++    &quot;url&quot;: &quot;https://github.com/Kierznowski/reactive-chat.git&quot;,
++    &quot;accountId&quot;: &quot;125f54a4-0d31-4bab-aaee-f1e197bb37aa&quot;
+   }
+-}]]></component>
++}</component>
+   <component name="ProjectColorInfo">{
+   &quot;customColor&quot;: &quot;&quot;,
+   &quot;associatedIndex&quot;: 5
+@@ -67,7 +60,7 @@
+     "RunOnceActivity.ShowReadmeOnStart": "true",
+     "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
+     "RunOnceActivity.git.unshallow": "true",
+-    "git-widget-placeholder": "feat/user-management",
++    "git-widget-placeholder": "master",
+     "kotlin-language-version-configured": "true",
+     "last_opened_file_path": "/home/kierznowski/Pulpit/PersonalCS/projects/Reactive_communicator/chat-app"
+   }
+@@ -158,12 +151,21 @@
+       <option name="project" value="LOCAL" />
+       <updated>1763391056820</updated>
+     </task>
+-    <option name="localTasksCounter" value="3" />
++    <task id="LOCAL-00003" summary="Basic authorization server with non-opaque tokens.">
++      <option name="closed" value="true" />
++      <created>1763545378278</created>
++      <option name="number" value="00003" />
++      <option name="presentableId" value="LOCAL-00003" />
++      <option name="project" value="LOCAL" />
++      <updated>1763545378278</updated>
++    </task>
++    <option name="localTasksCounter" value="4" />
+     <servers />
+   </component>
+   <component name="VcsManagerConfiguration">
+     <MESSAGE value="init" />
+     <MESSAGE value="Simple client for testing." />
+-    <option name="LAST_COMMIT_MESSAGE" value="Simple client for testing." />
++    <MESSAGE value="Basic authorization server with non-opaque tokens." />
++    <option name="LAST_COMMIT_MESSAGE" value="Basic authorization server with non-opaque tokens." />
+   </component>
+ </project>
+\ No newline at end of file

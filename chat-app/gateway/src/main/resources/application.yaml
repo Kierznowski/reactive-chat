@@ -1,5 +1,21 @@
 spring:
   application:
     name: gateway
+  security:
+    oauth2:
+      client:
+        provider:
+          chat_auth_server:
+            issuer_uri: http://127.0.0.1:8000
+        registration:
+          chat_auth_server:
+            client-id: client
+            client-name: chat_client
+            client-secret: secret
+            provider: chat_auth_server
+            client-authentication-method: client_secret_basic
+            redirect-uri: http://localhost:9000/login/oauth2/code/chat_auth_server
+            scope[0]: openid
+
 server:
   port: 9000

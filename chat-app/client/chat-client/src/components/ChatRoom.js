@@ -7,9 +7,28 @@ export default function ChatRoom({ userId, roomId }) {
 
     useEffect(() => {
       async function load() {
-        const res = await fetch(`http://localhost:9200/history/${roomId}`);
-        const data = await res.json();
-        setMessages(data);
+        try {
+          const res = await fetch(`http://localhost:9000/gateway/history/${roomId}`, {
+            method: "GET",
+            credentials: "include"
+          });
+          if(res.redirected) {
+            window.location.href = res.url;
+            return;
+          }
+
+          if(res.status === 401) {
+            window.location.href = "http://localhost:9000/login";
+            return;
+          }
+
+          const data = await res.json();
+          console.log("Fetched history: " + data);
+          setMessages(Array.isArray(data) ? data : []);
+        } catch (err) {
+          console.error("Error fetching history", err);
+          setMessages([]);
+        }
       }
       load();
     }, [roomId])
