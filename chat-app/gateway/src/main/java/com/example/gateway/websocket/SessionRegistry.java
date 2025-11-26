@@ -19,18 +19,18 @@ public class SessionRegistry {
         sessionUser.put(webSocketSession, userId);
     }
 
-    public void joinRoom(String roomId, WebSocketSession webSocketSession) {
-        rooms.computeIfAbsent(roomId, k -> ConcurrentHashMap.newKeySet()).add(webSocketSession);
-        sessionRoom.put(webSocketSession, roomId);
+    public void joinRoom(String roomId, WebSocketSession session) {
+        rooms.computeIfAbsent(roomId, k -> ConcurrentHashMap.newKeySet()).add(session);
+        sessionRoom.put(session, roomId);
     }
 
     public Set<WebSocketSession> getSessionsInRoom(String roomId) {
-        return rooms.get(roomId);
+        return rooms.getOrDefault(roomId, Collections.emptySet());
     }
 
-    public void removeSession(WebSocketSession webSocketSession) {
-        String user = sessionUser.remove(webSocketSession);
-        String room = sessionRoom.remove(webSocketSession);
+    public void removeSession(WebSocketSession session) {
+        String user = sessionUser.remove(session);
+        String room = sessionRoom.remove(session);
         if (user != null) {
             users.remove(user);
         }
@@ -38,7 +38,8 @@ public class SessionRegistry {
         if (room != null) {
             Set<WebSocketSession> sessions = rooms.get(room);
             if (sessions != null) {
-                rooms.get(room).remove(webSocketSession);
+                sessions.remove(session);
+                if(sessions.isEmpty()) rooms.remove(room);
             }
         }
 

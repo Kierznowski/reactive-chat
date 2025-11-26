@@ -1,6 +1,6 @@
-package com.example.history_service.history;
+package com.example.history_service.repository;
 
-import com.example.history_service.DTO.MessageEntity;
+import com.example.history_service.model.MessageEntity;
 import org.springframework.data.repository.reactive.ReactiveCrudRepository;
 import reactor.core.publisher.Flux;
 

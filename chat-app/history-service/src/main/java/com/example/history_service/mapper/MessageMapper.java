@@ -1,6 +1,7 @@
-package com.example.history_service.DTO;
+package com.example.history_service.mapper;
 
 import com.example.common.model.ChatMessage;
+import com.example.history_service.model.MessageEntity;
 import org.springframework.stereotype.Component;
 
 @Component

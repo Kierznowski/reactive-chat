@@ -68,7 +68,7 @@ public class SecurityConfig {
         http
                 .cors(cors -> cors.configurationSource(corsConfigurationSource()))
                 .csrf(AbstractHttpConfigurer::disable)
-                .authorizeHttpRequests(c -> c.anyRequest().authenticated())
+                .authorizeHttpRequests(c -> c.anyRequest().permitAll())
                 .formLogin(Customizer.withDefaults());
 
         return http.build();
@@ -89,7 +89,7 @@ public class SecurityConfig {
 
     @Bean
     public UserDetailsService userDetailsService(PasswordEncoder passwordEncoder) {
-        UserDetails userDetails = User.withUsername("bill")
+        UserDetails userDetails = User.withUsername("bill@test.com")
                 .password(passwordEncoder().encode("pass"))
                 .roles("USER")
                 .build();
