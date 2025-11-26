@@ -59,7 +59,7 @@ The system consists of several independent microservices:
 <img src="./screenshots/chat3.png" width=600/>
 <img src="./screenshots/chat4.png" width=600/>
 
-## Future Imporovements
+## Future Improvements
 
 - more scalable architecture with backpressure, service discovery etc.
 - more convenient deployment with docker 
