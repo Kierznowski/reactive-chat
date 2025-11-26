@@ -1,4 +1,4 @@
-package com.example.history_service.DTO;
+package com.example.history_service.model;
 
 
 import com.example.common.model.MessageType;

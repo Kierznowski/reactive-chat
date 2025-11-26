@@ -1,20 +1,20 @@
-package com.example.history_service.rabbit;
+package com.example.history_service.service;
 
 import com.example.common.model.ChatMessage;
-import com.example.history_service.DTO.MessageEntity;
-import com.example.history_service.DTO.MessageMapper;
-import com.example.history_service.history.MessageRepository;
+import com.example.history_service.model.MessageEntity;
+import com.example.history_service.mapper.MessageMapper;
+import com.example.history_service.repository.MessageRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.rabbitmq.client.ConnectionFactory;
-import jakarta.annotation.PostConstruct;
+import jakarta.annotation.PreDestroy;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+import reactor.core.Disposable;
 import reactor.core.publisher.Mono;
-import reactor.rabbitmq.RabbitFlux;
 import reactor.rabbitmq.Receiver;
-import reactor.rabbitmq.ReceiverOptions;
+import reactor.util.retry.Retry;
 
 import java.io.IOException;
+import java.time.Duration;
 
 @Slf4j
 @Service
@@ -25,19 +25,23 @@ public class RabbitService {
     public final ObjectMapper objectMapper;
     public final MessageMapper mapper;
 
-    public RabbitService(ConnectionFactory connectionFactory,
-                         MessageRepository messageRepository,
+    private Disposable subscription;
+
+    public RabbitService(MessageRepository messageRepository,
                          ObjectMapper objectMapper,
-                         MessageMapper messageMapper) {
-        this.receiver = RabbitFlux.createReceiver(new ReceiverOptions().connectionFactory(connectionFactory));
+                         MessageMapper messageMapper,
+                         Receiver receiver) {
+        this.receiver = receiver;
         this.objectMapper = objectMapper;
         this.repository = messageRepository;
         this.mapper = messageMapper;
+
+        startConsumer();
+
     }
 
-    @PostConstruct
-    public void listenForMessageToPersist() {
-        receiver.consumeAutoAck("persist.message")
+    private void startConsumer() {
+        subscription = receiver.consumeAutoAck("persist.message")
                 .map(delivery -> {
                     try {
                         return objectMapper.readValue(delivery.getBody(), ChatMessage.class);
@@ -46,13 +50,19 @@ public class RabbitService {
                     }
                 })
                 .flatMap(this::persistMessage)
-                .subscribe(
-                        success -> log.info("Message persisted in DB: {}", success.getId()),
-                        error -> log.error("Persisting message into DB failure: {}", error.getMessage())
-                );
+                .doOnError(e -> log.error("Rabbit error: {}", e.getMessage()))
+                .retryWhen(Retry.backoff(10, Duration.ofSeconds(1)))
+                .subscribe(msg -> log.info("Persisted message {}", msg.getId()));
     }
 
     public Mono<MessageEntity> persistMessage(ChatMessage message) {
         return repository.save(mapper.toEntity(message));
+    }
+
+    @PreDestroy
+    public void shutdown() {
+        if(subscription != null) {
+            subscription.dispose();
+        }
     }
 }

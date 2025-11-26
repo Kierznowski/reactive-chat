@@ -1,10 +1,11 @@
 let socket;
 
 export function connect(userId, roomId, onMessage) {
-    if(socket && socket.readyState === WebSocket.OPEN) return;
+    if(socket && socket.readyState === WebSocket.OPEN) {
+        return;
+    }
 
-    socket = new WebSocket("ws://localhost:9000/chat-message");
-
+    socket = new WebSocket("ws://localhost:9000/ws/chat-message");
     socket.onopen = () => {
         socket.send(JSON.stringify({
             type: "JOIN",

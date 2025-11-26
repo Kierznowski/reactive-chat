@@ -1,23 +1,35 @@
 package com.example.user_service.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import lombok.AccessLevel;
-import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
+import jakarta.persistence.*;
+import lombok.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
-@Entity(name = "chat_user")
+@Entity
+@Table(name = "chat_user")
+@Data
 @AllArgsConstructor
-@NoArgsConstructor(access = AccessLevel.PRIVATE, force = true)
+@NoArgsConstructor
 public class User {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
+
+    @Column(unique = true, nullable = false)
     String email;
+
+    @Column(unique = true)
+    String username;
+
+    @Column(name = "password_hash")
     String passwordHash;
-    List<String> roomIds;
+
+    @ManyToMany
+    @JoinTable(
+            name = "user_room",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "room_id")
+    )
+    private List<Room> rooms = new ArrayList<>();
 }

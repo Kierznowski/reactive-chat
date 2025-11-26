@@ -1,9 +1,14 @@
+import "./../styles/ChatRoom.css";
 import { useEffect, useState } from "react";
 import { sendMessage, connect, closeSocket } from "../websocket";
+import { useLocation } from "react-router-dom";
 
-export default function ChatRoom({ userId, roomId }) {
+export default function ChatRoom() {
     const [messages, setMessages] = useState([]);
     const [text, setText] = useState("");
+
+    const location = useLocation();
+    const { userId, roomId } = location.state;
 
     useEffect(() => {
       async function load() {
@@ -18,7 +23,7 @@ export default function ChatRoom({ userId, roomId }) {
           }
 
           if(res.status === 401) {
-            window.location.href = "http://localhost:9000/login";
+              window.location.href = "http://localhost:9000/oauth2/authorization/chat_auth_server";
             return;
           }
 
@@ -48,55 +53,26 @@ export default function ChatRoom({ userId, roomId }) {
     }
 
     return (
-        <div style={styles.container}>
-            <h2>Room: {roomId}</h2>
+        <div className="chatroom-container">
+            <h1>Room: {roomId}</h1>
 
-            <div style={styles.messages}>
+            <div className="messages">
                 {messages.map((m, i) => (
-                    <div key={i} style={styles.message}>
+                    <div key={i} className="message">
                         <b>{m.senderId}: </b>{m.content}
                     </div>
                 ))}
             </div>
-            <div style={styles.inputRow}>
+            <div className="input-row">
                 <input
-                    style={styles.input}
                     value={text}
                     placeholder="Write message..."
                     onChange={(e) => setText(e.target.value)}
                 />
-                <button style={styles.button} onClick={send}>Send</button>
+                <button className="send-button" onClick={send}>Send</button>
             </div>
 
         </div>
     );
 }
 
-const styles = {
-  container: {
-    width: "500px",
-    margin: "40px auto",
-    display: "flex",
-    flexDirection: "column"
-  },
-  messages: {
-    border: "1px solid #ccc",
-    padding: "10px",
-    height: "300px",
-    overflowY: "auto",
-    marginBottom: "10px"
-  },
-  message: {
-    padding: "4px 0"
-  },
-  inputRow: {
-    display: "flex"
-  },
-  input: {
-    flex: 1,
-    padding: "10px"
-  },
-  button: {
-    padding: "10px"
-  }
-};

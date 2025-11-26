@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.Map;
 
 @RequestMapping("/gateway/auth")
-@CrossOrigin(origins = {"http://localhost:3000"})
 @RestController
 public class AuthController {
 
@@ -26,5 +25,4 @@ public class AuthController {
                 "username", user.getName()
             );
     }
-
 }

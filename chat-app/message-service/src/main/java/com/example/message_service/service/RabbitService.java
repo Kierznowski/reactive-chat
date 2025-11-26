@@ -1,4 +1,4 @@
-package com.example.message_service.rabbit;
+package com.example.message_service.service;
 
 import com.example.common.model.ChatMessage;
 import com.fasterxml.jackson.core.JsonProcessingException;
