@@ -11,14 +11,14 @@ import java.util.List;
 public class RoomMapper {
 
     public RoomDTO toDto(Room room) {
-        List<Long> memberIds = room.getMembers().stream()
-                .map(User::getId)
-                .toList();
         return new RoomDTO(
                 room.getId(),
                 room.getName(),
                 room.getOwner().getId(),
-                memberIds
+                room.getMembers()
+                        .stream()
+                        .map(User::getId)
+                        .toList()
         );
     }
 

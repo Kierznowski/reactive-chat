@@ -20,7 +20,7 @@ public class MessageMapper {
 
     public ChatMessage fromEntity(MessageEntity entity) {
         return new ChatMessage(
-            entity.getId(),
+                entity.getId(),
                 entity.getType(),
                 entity.getRoomId(),
                 entity.getSenderId(),

@@ -20,6 +20,7 @@ public class ProjectConfig {
     @Bean
     public SecurityWebFilterChain securityFilterChain(ServerHttpSecurity http) throws Exception {
         http.csrf(ServerHttpSecurity.CsrfSpec::disable);
+        http.cors(corsSpec -> corsSpec.configurationSource(corsConfig()));
         http.oauth2ResourceServer(c -> c.jwt(
                 j -> j.jwkSetUri(keySetUri)
         ));

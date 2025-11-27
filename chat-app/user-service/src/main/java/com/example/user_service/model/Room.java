@@ -26,5 +26,5 @@ public class Room {
     User owner;
 
     @ManyToMany(mappedBy = "rooms")
-    List<User> members = new ArrayList<>();
+    private List<User> members = new ArrayList<>();
 }
