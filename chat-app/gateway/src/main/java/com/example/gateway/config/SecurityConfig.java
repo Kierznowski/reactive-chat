@@ -29,6 +29,7 @@ public class SecurityConfig {
                 .authorizeExchange(exchanges -> exchanges
                         .pathMatchers("/gateway/auth/status").permitAll()
                         .pathMatchers("/gateway/rooms").permitAll()
+                        .pathMatchers("gateway/rooms/*").permitAll()
                         .anyExchange().permitAll()
                 )
                 .oauth2Login(o -> o.authenticationSuccessHandler(successHandler()));

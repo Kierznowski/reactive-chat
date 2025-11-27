@@ -93,8 +93,12 @@ public class SecurityConfig {
                 .password(passwordEncoder().encode("pass"))
                 .roles("USER")
                 .build();
+        UserDetails userDetails2 = User.withUsername("alice@test.com")
+                .password(passwordEncoder.encode("pass"))
+                .roles("USER")
+                .build();
 
-        return new InMemoryUserDetailsManager(userDetails);
+        return new InMemoryUserDetailsManager(userDetails, userDetails2);
     }
 
     @Bean

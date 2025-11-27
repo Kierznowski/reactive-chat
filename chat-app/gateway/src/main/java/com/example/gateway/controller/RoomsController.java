@@ -1,7 +1,7 @@
 package com.example.gateway.controller;
 
 import com.example.gateway.model.CreateRoomRequest;
-import com.example.gateway.model.Room;
+import com.example.gateway.model.RoomDTO;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.oauth2.client.OAuth2AuthorizedClient;
@@ -23,30 +23,26 @@ public class RoomsController {
     }
 
     @GetMapping
-    public Flux<Room> getUserRooms(@AuthenticationPrincipal OAuth2User user,
-                                   @RegisteredOAuth2AuthorizedClient("chat_auth_server") OAuth2AuthorizedClient client) {
+    public Flux<RoomDTO> getUserRooms(@AuthenticationPrincipal OAuth2User user,
+                                      @RegisteredOAuth2AuthorizedClient("chat_auth_server") OAuth2AuthorizedClient client) {
         String email = user.getName();
         String token = client.getAccessToken().getTokenValue();
-        System.out.println(token);
-        Flux<Room> response = webClient.get()
+
+        return webClient.get()
                 .uri("http://localhost:9300/users/{email}/rooms", email)
                 .headers(headers -> headers.setBearerAuth(token))
                 .retrieve()
-                .bodyToFlux(Room.class);
-
-        response.map(Room::getName)
-                .doOnNext(System.out::println)
-                .subscribe();
-
-        return response;
+                .bodyToFlux(RoomDTO.class);
     }
 
-    @PostMapping
-    public Mono<Room> createRoom(@AuthenticationPrincipal OAuth2User user,
-                                 @RegisteredOAuth2AuthorizedClient("chat_auth_server") OAuth2AuthorizedClient client,
-                                 @RequestBody CreateRoomRequest request) {
+    @PostMapping("/{roomName}")
+    public Mono<RoomDTO> createRoom(@AuthenticationPrincipal OAuth2User user,
+                                    @RegisteredOAuth2AuthorizedClient("chat_auth_server") OAuth2AuthorizedClient client,
+                                    @PathVariable("roomName") String roomName) {
+        CreateRoomRequest request = new CreateRoomRequest(roomName, user.getName());
+
         return webClient.post()
-                .uri("http://localhost:9300/users/{userId}/rooms", user.getName())
+                .uri("http://localhost:9300/rooms")
                 .headers(h -> h.setBearerAuth(client.getAccessToken().getTokenValue()))
                 .bodyValue(request)
                 .retrieve()
@@ -54,6 +50,6 @@ public class RoomsController {
                         r.bodyToMono(String.class)
                                 .flatMap(body -> Mono.error(new RuntimeException("Create room error: " + body)))
                 )
-                .bodyToMono(Room.class);
+                .bodyToMono(RoomDTO.class);
     }
 }

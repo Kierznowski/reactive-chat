@@ -5,11 +5,12 @@ import com.example.gateway.websocket.SessionRegistry;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.rabbitmq.client.ConnectionFactory;
-import jakarta.annotation.PostConstruct;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
-import reactor.rabbitmq.*;
+import reactor.rabbitmq.OutboundMessage;
+import reactor.rabbitmq.Receiver;
+import reactor.rabbitmq.Sender;
 
 import java.io.IOException;
 

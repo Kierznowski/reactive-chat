@@ -1,0 +1,51 @@
+.main-container {
+    font-size: 22px;
+}
+
+.inner-box {
+    display: flex;
+    gap: 200px;
+    justify-content: center;
+}
+
+.user-rooms {
+
+}
+
+
+.room-creation {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.room-input {
+    display: flex;
+    gap: 10px;
+}
+
+input {
+    height: 40px;
+}
+
+.no-rooms-msg {
+    margin-top: 20px;
+    font-size: 14px;
+}
+
+.roomlist-item {
+    text-decoration: none;
+    color: black;
+}
+
+.roomlist-item:hover {
+    color: black;
+    background-color: grey;
+    border-radius: 5px;
+}
+
+.roomlist-item:active {
+    color: beige;
+    background-color: black;
+    border-radius: 5px;
+}

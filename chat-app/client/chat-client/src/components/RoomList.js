@@ -4,11 +4,10 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
         
-export default function RoomList() {
+export default function RoomList(props) {
 
     const [rooms, setRooms] = useState([]);
-    const [roomName, setRoomName] = useState("");
-    const roomData = {userId: "Przem", roomId: "priv"};
+    const [newRoomName, setNewRoomName] = useState("");
 
      useEffect(() => {
         async function loadRooms() {
@@ -31,8 +30,21 @@ export default function RoomList() {
      }, []);
 
 
-    function createRoom() {
-        console.log(`room ${roomName} created!`);
+    async function createRoom() {
+        try {
+            const response = await fetch(`http://localhost:9000/gateway/rooms/${newRoomName}`, {
+                method: "POST",
+                credentials: "include"
+            });
+            if(!response.ok) {
+                throw new Error(`Response status: ${response.status}`);
+            }
+            const result = await response.json();
+            console.log("Res:" + result[0]);
+            setRooms([...rooms, result]);
+        } catch (error) {
+            console.log(error.message);
+        }
     }
 
     return (
@@ -45,8 +57,8 @@ export default function RoomList() {
                         <div className="no-rooms-msg">You have no rooms. Create one!</div>
                         : <ul>
                             {rooms.map(room => 
-                                <li key="room.id">
-                                    <Link to="/chatRoom" state={{userId: "bill.com", roomId: "general"}} 
+                                <li key={room.id}>
+                                    <Link to="/chatRoom" state={{userId: props.username, roomId: room.name}} 
                                         className="roomlist-item">
                                             {room.name}
                                     </Link>
@@ -62,9 +74,9 @@ export default function RoomList() {
                             id="room-input"
                             placeholder="room name"
                             name=""
+                            onChange={(event) => setNewRoomName(event.target.value)}
                         />
                         <button className="select-button" onClick={() => {
-                            setRoomName(document.getElementById("room-input").value);
                             createRoom();
                         }}>
                             Create

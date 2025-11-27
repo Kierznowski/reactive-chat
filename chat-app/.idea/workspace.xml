@@ -4,49 +4,30 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d3ee033f-53e4-48ed-9ed9-ec8adaf42bb1" name="Changes" comment="Working oath2 flow with frontend react client and gateway asa a bff.">
-      <change afterPath="$PROJECT_DIR$/gateway/src/main/java/com/example/gateway/model/CreateRoomRequest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/gateway/src/main/java/com/example/gateway/model/Room.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/user-service/src/main/java/com/example/user_service/DTO/RoomDTO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/user-service/src/main/java/com/example/user_service/DTO/UserDTO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/user-service/src/main/java/com/example/user_service/mapper/RoomMapper.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/user-service/src/main/java/com/example/user_service/repository/RoomRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/user-service/src/main/java/com/example/user_service/repository/UserRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/user-service/src/main/java/com/example/user_service/service/UserService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    <list default="true" id="d3ee033f-53e4-48ed-9ed9-ec8adaf42bb1" name="Changes" comment="Room controller in gateway">
+      <change afterPath="$PROJECT_DIR$/user-service/src/main/java/com/example/user_service/DTO/CreateRoomRequest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/user-service/src/main/java/com/example/user_service/controller/RoomController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/jarRepositories.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_19_11_2025,_15_49_[Changes]/shelved.patch" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_19_11_2025__15_49__Changes_.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/auth-server/src/main/java/com/example/auth_server/config/SecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/auth-server/src/main/java/com/example/auth_server/config/SecurityConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/chat-client/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/client/chat-client/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/chat-client/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/client/chat-client/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/chat-client/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/chat-client/src/App.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/chat-client/src/components/ChatRoom.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/chat-client/src/components/ChatRoom.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/chat-client/src/components/RoomList.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/chat-client/src/components/RoomList.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/chat-client/src/websocket.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/chat-client/src/websocket.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gateway/src/main/java/com/example/gateway/config/ProjectConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/gateway/src/main/java/com/example/gateway/config/ProjectConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gateway/src/main/java/com/example/gateway/config/RabbitConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/gateway/src/main/java/com/example/gateway/config/RabbitConfig.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/gateway/src/main/java/com/example/gateway/config/SecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/gateway/src/main/java/com/example/gateway/config/SecurityConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gateway/src/main/java/com/example/gateway/config/WebSocketConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/gateway/src/main/java/com/example/gateway/config/WebSocketConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gateway/src/main/java/com/example/gateway/controller/AuthController.java" beforeDir="false" afterPath="$PROJECT_DIR$/gateway/src/main/java/com/example/gateway/controller/AuthController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gateway/src/main/java/com/example/gateway/controller/HistoryController.java" beforeDir="false" afterPath="$PROJECT_DIR$/gateway/src/main/java/com/example/gateway/controller/HistoryController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/gateway/src/main/java/com/example/gateway/controller/RoomsController.java" beforeDir="false" afterPath="$PROJECT_DIR$/gateway/src/main/java/com/example/gateway/controller/RoomsController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gateway/src/main/java/com/example/gateway/model/CreateRoomRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/gateway/src/main/java/com/example/gateway/model/CreateRoomRequest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gateway/src/main/java/com/example/gateway/model/Room.java" beforeDir="false" afterPath="$PROJECT_DIR$/gateway/src/main/java/com/example/gateway/model/RoomDTO.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/gateway/src/main/java/com/example/gateway/rabbit/RabbitService.java" beforeDir="false" afterPath="$PROJECT_DIR$/gateway/src/main/java/com/example/gateway/rabbit/RabbitService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gateway/src/main/java/com/example/gateway/websocket/ChatWebSocketHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/gateway/src/main/java/com/example/gateway/websocket/ChatWebSocketHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gateway/src/main/java/com/example/gateway/websocket/SessionRegistry.java" beforeDir="false" afterPath="$PROJECT_DIR$/gateway/src/main/java/com/example/gateway/websocket/SessionRegistry.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/history-service/src/main/java/com/example/history_service/DTO/MessageEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/history-service/src/main/java/com/example/history_service/model/MessageEntity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/history-service/src/main/java/com/example/history_service/DTO/MessageMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/history-service/src/main/java/com/example/history_service/mapper/MessageMapper.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/history-service/src/main/java/com/example/history_service/config/ProjectConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/history-service/src/main/java/com/example/history_service/config/ProjectConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/history-service/src/main/java/com/example/history_service/config/RabbitConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/history-service/src/main/java/com/example/history_service/config/RabbitConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/history-service/src/main/java/com/example/history_service/history/HistoryController.java" beforeDir="false" afterPath="$PROJECT_DIR$/history-service/src/main/java/com/example/history_service/controller/HistoryController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/history-service/src/main/java/com/example/history_service/history/MessageRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/history-service/src/main/java/com/example/history_service/repository/MessageRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/history-service/src/main/java/com/example/history_service/rabbit/RabbitService.java" beforeDir="false" afterPath="$PROJECT_DIR$/history-service/src/main/java/com/example/history_service/service/RabbitService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/message-service/src/main/java/com/example/message_service/rabbit/RabbitService.java" beforeDir="false" afterPath="$PROJECT_DIR$/message-service/src/main/java/com/example/message_service/service/RabbitService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/user-service/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/user-service/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/user-service/src/main/java/com/example/user_service/UserRepository.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/history-service/src/main/java/com/example/history_service/mapper/MessageMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/history-service/src/main/java/com/example/history_service/mapper/MessageMapper.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/user-service/src/main/java/com/example/user_service/UserServiceApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/user-service/src/main/java/com/example/user_service/UserServiceApplication.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/user-service/src/main/java/com/example/user_service/config/SecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/user-service/src/main/java/com/example/user_service/config/SecurityConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/user-service/src/main/java/com/example/user_service/controller/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/user-service/src/main/java/com/example/user_service/controller/UserController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/user-service/src/main/java/com/example/user_service/mapper/RoomMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/user-service/src/main/java/com/example/user_service/mapper/RoomMapper.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/user-service/src/main/java/com/example/user_service/model/Room.java" beforeDir="false" afterPath="$PROJECT_DIR$/user-service/src/main/java/com/example/user_service/model/Room.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/user-service/src/main/java/com/example/user_service/model/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/user-service/src/main/java/com/example/user_service/model/User.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/user-service/src/main/resources/schema.sql" beforeDir="false" afterPath="$PROJECT_DIR$/user-service/src/main/resources/schema.sql" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -104,7 +85,7 @@
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;feat/rooms-controller-for-react&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;feat/creating-room&quot;,
     &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
     &quot;last_opened_file_path&quot;: &quot;/home/kierznowski/Pulpit/PersonalCS/projects/Reactive_communicator/chat-app/auth-server/src/main/java/com/example/auth_server&quot;,
     &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
@@ -121,7 +102,7 @@
       <recent name="com.example.user_service.config" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.GatewayApplication">
+  <component name="RunManager" selected="Application.HistoryServiceApplication">
     <configuration name="AuthServerApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.example.auth_server.AuthServerApplication" />
       <module name="auth-server" />
@@ -189,10 +170,10 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.GatewayApplication" />
         <item itemvalue="Application.UserServiceApplication" />
         <item itemvalue="Application.MessageServiceApplication" />
         <item itemvalue="Application.HistoryServiceApplication" />
+        <item itemvalue="Application.GatewayApplication" />
         <item itemvalue="Application.AuthServerApplication" />
       </list>
     </recent_temporary>

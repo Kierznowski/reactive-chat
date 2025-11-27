@@ -25,7 +25,9 @@ public class UserServiceApplication {
     public ApplicationRunner dataLoader(RoomRepository roomRepository, UserRepository userRepository) {
         return args -> {
             Optional<User> userOpt = userRepository.findByEmail("bill@test.com");
+            Optional<User> userOpt2 = userRepository.findByEmail("alice@test.com");
             User user;
+            User user2;
 
             if (userOpt.isEmpty()) {
                     user = new User();
@@ -37,14 +39,26 @@ public class UserServiceApplication {
                 user = userOpt.get();
             }
 
+            if (userOpt2.isEmpty()) {
+                user2 = new User();
+                user2.setEmail("alice@test.com");
+                user2.setUsername("alice");
+                user2.setPasswordHash(new BCryptPasswordEncoder().encode("pass"));
+                userRepository.save(user);
+            } else {
+                user2 = userOpt2.get();
+            }
+
                 Room sampleRoom = new Room();
-                sampleRoom.setName("sample room");
+                sampleRoom.setName("Test room");
                 sampleRoom.setOwner(user);
 
                 user.getRooms().add(sampleRoom);
+                user2.getRooms().add(sampleRoom);
 
                 roomRepository.save(sampleRoom);
                 userRepository.save(user);
+                userRepository.save(user2);
                 System.out.println("Loaded sample room");
         };
     }
