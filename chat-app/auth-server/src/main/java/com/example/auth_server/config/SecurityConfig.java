@@ -1,5 +1,7 @@
 package com.example.auth_server.config;
 
+import com.example.auth_server.repoository.UserRepository;
+import com.example.auth_server.service.ChatUserDetailsService;
 import com.nimbusds.jose.jwk.JWKSet;
 import com.nimbusds.jose.jwk.RSAKey;
 import com.nimbusds.jose.jwk.source.ImmutableJWKSet;
@@ -8,6 +10,8 @@ import com.nimbusds.jose.proc.SecurityContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.annotation.Order;
+import org.springframework.security.authentication.AuthenticationProvider;
+import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -63,12 +67,15 @@ public class SecurityConfig {
 
     @Bean
     @Order(2)
-    public SecurityFilterChain defaultSecurityFilterChain(HttpSecurity http) throws Exception {
+    public SecurityFilterChain defaultSecurityFilterChain(HttpSecurity http, UserDetailsService uds, PasswordEncoder encoder) throws Exception {
 
         http
                 .cors(cors -> cors.configurationSource(corsConfigurationSource()))
                 .csrf(AbstractHttpConfigurer::disable)
-                .authorizeHttpRequests(c -> c.anyRequest().permitAll())
+                .authorizeHttpRequests(c -> c
+                        .requestMatchers("/auth/register").permitAll()
+                        .requestMatchers("/login", "/error").permitAll()
+                        .anyRequest().authenticated())
                 .formLogin(Customizer.withDefaults());
 
         return http.build();
@@ -77,7 +84,7 @@ public class SecurityConfig {
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration config = new CorsConfiguration();
-        config.setAllowedOrigins(List.of("http://localhost:3000"));
+        config.setAllowedOrigins(List.of("http://localhost:3000", "http://localhost:9000"));
         config.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
         config.setAllowedHeaders(List.of("*"));
         config.setAllowCredentials(true);
@@ -85,20 +92,6 @@ public class SecurityConfig {
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         source.registerCorsConfiguration("/**", config);
         return source;
-    }
-
-    @Bean
-    public UserDetailsService userDetailsService(PasswordEncoder passwordEncoder) {
-        UserDetails userDetails = User.withUsername("bill@test.com")
-                .password(passwordEncoder().encode("pass"))
-                .roles("USER")
-                .build();
-        UserDetails userDetails2 = User.withUsername("alice@test.com")
-                .password(passwordEncoder.encode("pass"))
-                .roles("USER")
-                .build();
-
-        return new InMemoryUserDetailsManager(userDetails, userDetails2);
     }
 
     @Bean

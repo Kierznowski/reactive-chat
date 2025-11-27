@@ -27,6 +27,7 @@
     border: black solid 1px;
     border-radius: 3px;
     padding: 10px 20px;
+    box-shadow: 2px 2px black;
     width: fit-content;
     height: fit-content;
 }
@@ -38,6 +39,7 @@
 
 .select-button:active {
     background-color: black;
+    box-shadow: none;
 }   
 
 #header {

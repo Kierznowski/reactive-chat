@@ -1,4 +1,4 @@
-package com.example.gateway.model;
+package com.example.gateway.DTO;
 
 import lombok.Getter;
 import org.springframework.security.core.userdetails.User;

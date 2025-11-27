@@ -8,11 +8,6 @@
     justify-content: center;
 }
 
-.user-rooms {
-
-}
-
-
 .room-creation {
     display: flex;
     flex-direction: column;

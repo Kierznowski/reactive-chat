@@ -1,7 +1,8 @@
 package com.example.gateway.controller;
 
-import com.example.gateway.model.CreateRoomRequest;
-import com.example.gateway.model.RoomDTO;
+import com.example.gateway.DTO.CreateRoomRequest;
+import com.example.gateway.DTO.RoomDTO;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.oauth2.client.OAuth2AuthorizedClient;
@@ -18,8 +19,8 @@ public class RoomsController {
 
     private final WebClient webClient;
 
-    public RoomsController(WebClient webClient) {
-        this.webClient = webClient;
+    public RoomsController(@Qualifier("userWebClient") WebClient userServiceWebClient) {
+        this.webClient = userServiceWebClient;
     }
 
     @GetMapping
