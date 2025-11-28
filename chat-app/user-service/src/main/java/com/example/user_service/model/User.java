@@ -1,35 +1,34 @@
 package com.example.user_service.model;
 
-import jakarta.persistence.*;
-import lombok.*;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+import lombok.Data;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.time.Instant;
+import java.util.HashSet;
+import java.util.Set;
+import java.util.UUID;
 
-@Entity
-@Table(name = "chat_user")
 @Data
-@AllArgsConstructor
-@NoArgsConstructor
+@Entity
+@Table(name = "users")
 public class User {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    Long id;
+    private UUID id;
 
-    @Column(unique = true, nullable = false)
-    String email;
+    @Column(nullable = false, unique = true)
+    private String email;
 
-    @Column(unique = true)
-    String username;
+    @Column(nullable = false, unique = true)
+    private String username;
 
-    @Column(name = "password_hash")
-    String passwordHash;
+    @Column(name = "password_hash", nullable = false)
+    private String passwordHash;
 
-    @ManyToMany
-    @JoinTable(
-            name = "user_room",
-            joinColumns = @JoinColumn(name = "user_id"),
-            inverseJoinColumns = @JoinColumn(name = "room_id")
-    )
-    private List<Room> rooms = new ArrayList<>();
+    private boolean enabled = true;
+    private Instant created_at = Instant.now();
+
+    Set<String> roles = new HashSet<>();
 }
