@@ -46,7 +46,9 @@ The system consists of several independent microservices:
 
 - Gateway Service: Serves as the entry point for the frontend, validates and manages tokens, forwards authenticated requests to backend services.
 
-- User Service: Manages users, chat rooms and relations between them. Stores data in PostgreSQL.
+- User Service: Manages users data.
+
+- Room Service: Manages chat-rooms data and relations between rooms and users.
 
 - Chat Service: Handles real-time chat logic, broadcasts messages through RabbitMQ, forwards messages for persistence.
 
