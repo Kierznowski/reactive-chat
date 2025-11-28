@@ -2,10 +2,8 @@ package com.example.gateway.service;
 
 import com.example.gateway.DTO.RegisterRequest;
 import com.example.gateway.DTO.RegisterResponse;
-import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.http.HttpStatusCode;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
 import reactor.core.publisher.Mono;

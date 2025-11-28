@@ -8,4 +8,4 @@ spring:
       mode: always
 
 server:
-  port: 9400
+  port: 9300

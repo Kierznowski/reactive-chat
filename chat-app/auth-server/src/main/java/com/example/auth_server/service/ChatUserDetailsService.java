@@ -1,35 +1,43 @@
 package com.example.auth_server.service;
 
-import com.example.auth_server.model.User;
-import com.example.auth_server.repoository.UserRepository;
+import com.example.auth_server.DTO.UserAuthDTO;
+import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
+import org.springframework.web.reactive.function.client.WebClient;
 
-@Slf4j
+
 @Service
 @RequiredArgsConstructor
+@Slf4j
 public class ChatUserDetailsService implements UserDetailsService {
 
-    private final UserRepository userRepository;
+    private final WebClient webClient;
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-            log.warn("AUTH: loadUserByUsername called with: {}", username);
-        User user = userRepository.findByUsername(username)
-                .orElseThrow(() -> new UsernameNotFoundException("User not found: " + username));
+        log.info("Loading user by username: {}", username);
 
-        return org.springframework.security.core.userdetails.User.builder()
-                .username(user.getUsername())
-                .password(user.getPassword())
-                .roles(user.getRoles().toArray(new String[0]))
-                .accountExpired(!user.isAccountNonExpired())
-                .accountLocked(!user.isAccountNonLocked())
-                .credentialsExpired(!user.isCredentialsNonExpired())
-                .disabled(!user.isEnabled())
+
+        UserAuthDTO user = webClient.get()
+                .uri("http://localhost:9400/internal/users/by-username/" + username)
+                .retrieve()
+                .bodyToMono(UserAuthDTO.class)
+                .block();
+
+        if(user == null) {
+            throw new UsernameNotFoundException("User not found: " + username);
+        }
+
+        return User.builder()
+                .username(user.username())
+                .password(user.passwordHash())
+                .roles(user.roles().toArray(new String[0]))
                 .build();
     }
 }

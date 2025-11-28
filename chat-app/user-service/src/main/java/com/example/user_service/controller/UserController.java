@@ -1,33 +1,37 @@
 package com.example.user_service.controller;
 
-import com.example.user_service.repository.UserRepository;
-import com.example.user_service.DTO.RoomDTO;
-import com.example.user_service.mapper.RoomMapper;
+import com.example.user_service.DTO.RegisterRequest;
+import com.example.user_service.DTO.UserAuthDTO;
+import com.example.user_service.DTO.UserDTO;
 import com.example.user_service.service.UserService;
+import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-
+@RequiredArgsConstructor
 @RestController
-@RequestMapping("/users")
 public class UserController {
 
-    public final UserService service;
+    private final UserService userService;
 
-    public UserController(UserService service) {
-        this.service = service;
+    @PostMapping("/auth/register")
+    public ResponseEntity<UserDTO> registerUser(@RequestBody RegisterRequest request) {
+        UserDTO userDTO = userService.registerUser(request);
+        return ResponseEntity.status(HttpStatus.CREATED).body(userDTO);
     }
 
-    @PostMapping("/login")
-    public void loginUser() {
+    @GetMapping("/internal/users/by-username/{username}")
+    public ResponseEntity<UserAuthDTO> getByUsername(@PathVariable("username") String username) {
+        return userService.getAuthUserByUsername(username)
+                .map(ResponseEntity::ok)
+                .orElse(ResponseEntity.notFound().build());
     }
 
-    @PostMapping("/register")
-    public void registerUser() {
-    }
-
-    @GetMapping("/{email}/rooms")
-    public List<RoomDTO> getUserRooms(@PathVariable("email") String email) {
-        return service.getRoomsForUser(email);
+    @GetMapping("/internal/users/by-email/{email}")
+    public ResponseEntity<UserAuthDTO> getByEmail(@PathVariable("email") String email) {
+        return userService.getAuthUserByEmail(email)
+                .map(ResponseEntity::ok)
+                .orElse(ResponseEntity.notFound().build());
     }
 }

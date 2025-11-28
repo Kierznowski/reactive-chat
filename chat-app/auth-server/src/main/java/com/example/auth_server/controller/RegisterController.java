@@ -1,46 +1,35 @@
 package com.example.auth_server.controller;
 
 import com.example.auth_server.DTO.RegisterRequest;
-import com.example.auth_server.model.User;
-import com.example.auth_server.service.UserService;
-import exceptions.UserAlreadyExistsException;
+import com.example.auth_server.DTO.UserDTO;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.reactive.function.client.WebClient;
 
-import java.util.Map;
-
-@Slf4j
-@RequiredArgsConstructor
 @RestController
 @RequestMapping("/auth/register")
+@RequiredArgsConstructor
+@Slf4j
 public class RegisterController {
 
-    private final UserService userService;
+
+    private final WebClient webClient;
 
     @PostMapping
-    public ResponseEntity<?> registerAccount(@RequestBody RegisterRequest request) {
+    public ResponseEntity<?> register(@RequestBody RegisterRequest request) {
 
-        try {
-            User user = userService.registerUser(request);
+        UserDTO result = webClient.post()
+                .uri("http://localhost:9400/auth/register")
+                .bodyValue(request)
+                .retrieve()
+                .bodyToMono(UserDTO.class)
+                .block();
 
-            return ResponseEntity.ok(Map.of(
-                    "status", "success",
-                    "message", "User registered successfully",
-                    "userId", user.getId()
-            ));
-        } catch (UserAlreadyExistsException e) {
-            return ResponseEntity
-                    .status(HttpStatus.CONFLICT)
-                    .body(Map.of(
-                            "status", "error",
-                            "message", "Registration failed"
-                    ));
-        }
+        return ResponseEntity.ok(result);
     }
 }

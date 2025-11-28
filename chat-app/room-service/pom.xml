@@ -6,29 +6,24 @@
 		<groupId>com.example</groupId>
 		<artifactId>chat-app</artifactId>
 		<version>1.0.0</version>
-        <relativePath />
+		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
-	<artifactId>auth-server</artifactId>
-    <dependencies>
+	<artifactId>room-service</artifactId>
+	<dependencies>
         <dependency>
             <groupId>com.example</groupId>
             <artifactId>common</artifactId>
             <version>1.0.0</version>
         </dependency>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-actuator</artifactId>
-        </dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-actuator</artifactId>
+		</dependency>
         <!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-web -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
-       <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-webflux</artifactId>
-        </dependency>
-
         <!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-data-jpa -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -40,24 +35,18 @@
             <groupId>com.h2database</groupId>
             <artifactId>h2</artifactId>
         </dependency>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-test</artifactId>
-            <scope>test</scope>
-        </dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-test</artifactId>
+			<scope>test</scope>
+		</dependency>
 
         <!-- SECURITY -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-security</artifactId>
         </dependency>
-        <dependency>
-            <groupId>org.springframework.security</groupId>
-            <artifactId>spring-security-oauth2-authorization-server</artifactId>
-            <version>1.2.3</version>
-        </dependency>
     </dependencies>
-
 
 	<build>
 		<plugins>
