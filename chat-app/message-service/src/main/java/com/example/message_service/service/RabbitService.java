@@ -1,6 +1,7 @@
 package com.example.message_service.service;
 
-import com.example.common.model.ChatMessage;
+import com.example.message_service.DTO.IncomingMessage;
+import com.example.message_service.model.Message;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.rabbitmq.client.ConnectionFactory;
@@ -30,7 +31,7 @@ public class RabbitService {
         receiver.consumeAutoAck("chat.messages")
                 .map(delivery -> {
                     try {
-                        return objectMapper.readValue(delivery.getBody(), ChatMessage.class);
+                        return objectMapper.readValue(delivery.getBody(), IncomingMessage.class);
                     } catch (IOException e) {
                         throw new RuntimeException(e);
                     }
@@ -42,36 +43,42 @@ public class RabbitService {
                 .subscribe();
     }
 
-    Mono<byte[]> transformToBytes(ChatMessage chatMessage) {
+    Mono<byte[]> transformToBytes(Message message) {
         try {
-            byte[] msgData = objectMapper.writeValueAsBytes(chatMessage);
+            byte[] msgData = objectMapper.writeValueAsBytes(message);
             return Mono.just(msgData);
         } catch (JsonProcessingException e) {
             return Mono.error(e);
         }
     }
 
-    Mono<byte[]> sendMessageToChat(byte[] chatMessage) {
+    Mono<byte[]> sendMessageToChat(byte[] message) {
         OutboundMessage msg = new OutboundMessage(
                 "",
                 "processed.message",
-                chatMessage
+                message
         );
-        return sender.send(Mono.just(msg)).thenReturn(chatMessage);
+        return sender.send(Mono.just(msg)).thenReturn(message);
     }
 
-    Mono<byte[]> sendMessageToHistory(byte[] chatMessage) {
+    Mono<byte[]> sendMessageToHistory(byte[] message) {
         OutboundMessage msg = new OutboundMessage(
                 "",
                 "persist.message",
-                chatMessage
+                message
             );
-            return sender.send(Mono.just(msg)).thenReturn(chatMessage);
+            return sender.send(Mono.just(msg)).thenReturn(message);
     }
 
-    private Mono<ChatMessage> registerMessage(ChatMessage chatMessage) {
-        chatMessage.setId(UUID.randomUUID().toString());
-        chatMessage.setTimeStamp();
-        return Mono.just(chatMessage);
+    private Mono<Message> registerMessage(IncomingMessage message) {
+        Message registeredMessage = new Message();
+        registeredMessage.setId(UUID.randomUUID().toString());
+        registeredMessage.setType(message.getType());
+        registeredMessage.setRoomId(message.getRoomId());
+        registeredMessage.setSenderId(message.getSenderId());
+        registeredMessage.setContent(message.getContent());
+        registeredMessage.setCreatedAt();
+
+        return Mono.just(registeredMessage);
     }
 }

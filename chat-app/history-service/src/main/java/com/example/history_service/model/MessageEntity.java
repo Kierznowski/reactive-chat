@@ -8,7 +8,9 @@ import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.time.Instant;
 import java.time.LocalDateTime;
+import java.util.UUID;
 
 @Getter
 @AllArgsConstructor
@@ -19,8 +21,8 @@ public class MessageEntity {
     @Id
     private String id;
     private MessageType type;
-    private String roomId;
-    private String senderId;
+    private Long roomId;
+    private UUID senderId;
     private String content;
-    private LocalDateTime timestamp;
+    private Instant createdAt;
 }

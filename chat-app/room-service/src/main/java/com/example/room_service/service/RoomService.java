@@ -22,12 +22,12 @@ public class RoomService {
         room.setName(name);
         room.setOwnerId(ownerId);
         room.getMembers().add(ownerId);
-        Room savedRoom = repository.save(room);
-        return mapper.toDto(savedRoom);
+        return mapper.toDto(repository.save(room));
     }
 
     public List<RoomDTO> getRoomsForUser(UUID userId) {
-        return repository.findByMemberId(userId).stream()
+        return repository.findByMemberId(userId)
+                .stream()
                 .map(mapper::toDto)
                 .toList();
     }

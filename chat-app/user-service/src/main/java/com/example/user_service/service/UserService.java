@@ -44,4 +44,9 @@ public class UserService {
         return repository.findByEmail(email).map(mapper::toUserAuthDTO);
     }
 
+    public Optional<String> getUsernameByUserId(String userId) {
+        Optional<User> user = repository.findById(UUID.fromString(userId));
+        return user.map(User::getUsername);
+    }
+
 }

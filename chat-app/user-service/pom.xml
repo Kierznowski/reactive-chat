@@ -6,7 +6,7 @@
 		<groupId>com.example</groupId>
 		<artifactId>chat-app</artifactId>
 		<version>1.0.0</version>
-		<relativePath/> <!-- lookup parent from repository -->
+		<relativePath/>
 	</parent>
 	<artifactId>user-service</artifactId>
 	<dependencies>

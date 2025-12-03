@@ -40,7 +40,6 @@ export default function RoomList(props) {
                 throw new Error(`Response status: ${response.status}`);
             }
             const result = await response.json();
-            console.log("Res:" + result[0]);
             setRooms([...rooms, result]);
         } catch (error) {
             console.log(error.message);
@@ -58,7 +57,7 @@ export default function RoomList(props) {
                         : <ul>
                             {rooms.map(room => 
                                 <li key={room.id}>
-                                    <Link to="/chatRoom" state={{userId: props.username, roomId: room.name}} 
+                                    <Link to="/chatRoom" state={{userId: props.userId, roomName: room.name, roomId: room.id}} 
                                         className="roomlist-item">
                                             {room.name}
                                     </Link>

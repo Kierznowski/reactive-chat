@@ -8,7 +8,7 @@ export default function ChatRoom() {
     const [text, setText] = useState("");
 
     const location = useLocation();
-    const { userId, roomId } = location.state;
+    const { userId, roomName, roomId } = location.state;
 
     useEffect(() => {
       async function load() {
@@ -39,6 +39,7 @@ export default function ChatRoom() {
     }, [roomId])
 
     useEffect(() => {
+        console.log("UserId: ", userId, "roomId: ", roomId);
         connect(userId, roomId, msg => {
             setMessages(prev => [...prev, msg]);
         });
@@ -54,12 +55,12 @@ export default function ChatRoom() {
 
     return (
         <div className="chatroom-container">
-            <h1>Room: {roomId}</h1>
+            <h1>Room: {roomName}</h1>
 
             <div className="messages">
                 {messages.map((m, i) => (
-                    <div key={i} className="message">
-                        <b>{m.senderId}: </b>{m.content}
+                    <div key={m.id} className="message">
+                        <b>{m.senderUsername}: </b>{m.content}
                     </div>
                 ))}
             </div>

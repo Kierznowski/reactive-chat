@@ -2,6 +2,7 @@ package com.example.gateway.controller;
 
 import com.example.gateway.DTO.RegisterRequest;
 import com.example.gateway.service.AuthService;
+import com.example.gateway.service.UserService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.MediaType;
@@ -20,17 +21,25 @@ import java.util.Map;
 public class AuthController {
 
     private final AuthService authService;
+    private final UserService userService;
 
     @GetMapping("/status")
-    public Map<String, Object> getAuthStatus(@AuthenticationPrincipal OAuth2User user) {
+    public Mono<Map<String, Object>> getAuthStatus(@AuthenticationPrincipal OAuth2User user) {
         if (user == null) {
-            return Map.of("authenticated", false);
+            return Mono.just(Map.of("authenticated", false));
+        }
+        String userId = user.getAttribute("sub");
+        if(userId == null) {
+            log.error("Cannot retrieve user id.");
+            return Mono.just(Map.of("authenticated", false));
         }
 
-        return Map.of(
-                "authenticated", true,
-                "username", user.getName()
-            );
+        return userService.getUsernameByUserId(userId)
+                .map(username -> Map.of(
+                        "authenticated", true,
+                        "username", username,
+                        "userid", userId
+                ));
     }
 
     @PostMapping(path = "/register", consumes = MediaType.APPLICATION_JSON_VALUE)

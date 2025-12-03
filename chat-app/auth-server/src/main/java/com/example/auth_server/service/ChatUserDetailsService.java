@@ -1,7 +1,6 @@
 package com.example.auth_server.service;
 
 import com.example.auth_server.DTO.UserAuthDTO;
-import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.userdetails.User;
@@ -10,6 +9,8 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
+
+import java.util.UUID;
 
 
 @Service
@@ -25,7 +26,7 @@ public class ChatUserDetailsService implements UserDetailsService {
 
 
         UserAuthDTO user = webClient.get()
-                .uri("http://localhost:9400/internal/users/by-username/" + username)
+                .uri("http://localhost:9400/internal/users/by-username/{username}", username)
                 .retrieve()
                 .bodyToMono(UserAuthDTO.class)
                 .block();
@@ -39,5 +40,15 @@ public class ChatUserDetailsService implements UserDetailsService {
                 .password(user.passwordHash())
                 .roles(user.roles().toArray(new String[0]))
                 .build();
+    }
+
+    public UUID fetchUserIdFromUserService(String username) {
+        UserAuthDTO user = webClient.get()
+                .uri("http://localhost:9400/internal/users/by-username/{username}", username)
+                .retrieve()
+                .bodyToMono(UserAuthDTO.class)
+                .block();
+
+        return user.id();
     }
 }

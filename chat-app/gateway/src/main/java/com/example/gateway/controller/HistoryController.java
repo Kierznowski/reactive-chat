@@ -31,7 +31,7 @@ public class HistoryController {
                                             @AuthenticationPrincipal OAuth2User principal,
                                             @RegisteredOAuth2AuthorizedClient("chat_auth_server")OAuth2AuthorizedClient client) {
         return webClient.get()
-                .uri("http://localhost:9200/history/" + roomId)
+                .uri("http://localhost:9200/history/{roomId}", roomId)
                 .headers(h -> h.setBearerAuth(client.getAccessToken().getTokenValue()))
                 .retrieve()
                 .onStatus(HttpStatusCode::isError, response ->

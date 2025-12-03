@@ -28,12 +28,13 @@ export function sendMessage(userId, roomId, content) {
 
     socket.send(JSON.stringify({
         type: "MESSAGE",
-        senderId: userId,
         roomId: roomId,
+        senderId: userId,
         content: content
     }));
 }
 
 export function closeSocket() {
+    console.log("Called --");
     if (socket) socket.close();
 }
