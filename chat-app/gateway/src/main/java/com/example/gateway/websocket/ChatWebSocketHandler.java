@@ -1,8 +1,8 @@
 package com.example.gateway.websocket;
 
-import com.example.common.model.ChatMessage;
-import com.example.gateway.DTO.BroadcastMessage;
-import com.example.gateway.DTO.ReceivedMessage;
+import com.example.gateway.DTO.OutcomingMessageEvent;
+import com.example.gateway.DTO.MessageResponseDTO;
+import com.example.gateway.DTO.IncomingMessageEvent;
 import com.example.gateway.rabbit.RabbitService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.annotation.PostConstruct;
@@ -54,15 +54,15 @@ public class ChatWebSocketHandler implements WebSocketHandler {
                 .doFinally(sig -> sessionRegistry.removeSession(session));
     }
 
-    private Mono<ReceivedMessage> safeParse(String json) {
+    private Mono<IncomingMessageEvent> safeParse(String json) {
         try {
-            return Mono.just(objectMapper.readValue(json, ReceivedMessage.class));
+            return Mono.just(objectMapper.readValue(json, IncomingMessageEvent.class));
         } catch (Exception e) {
             return Mono.empty();
         }
     }
 
-    private Mono<Void> handleIncomingMessage(WebSocketSession session, ReceivedMessage message) {
+    private Mono<Void> handleIncomingMessage(WebSocketSession session, IncomingMessageEvent message) {
         return switch (message.type()) {
             case MESSAGE -> rabbitService.sendMessageToProcess(message);
             case JOIN -> {
@@ -74,8 +74,8 @@ public class ChatWebSocketHandler implements WebSocketHandler {
         };
     }
 
-    private Mono<Void> sendToRoom(ChatMessage message) {
-        Set<WebSocketSession> sessions = sessionRegistry.getSessionsInRoom(message.getRoomId());
+    private Mono<Void> sendToRoom(OutcomingMessageEvent message) {
+        Set<WebSocketSession> sessions = sessionRegistry.getSessionsInRoom(message.getRoomId().toString());
         if(sessions == null || sessions.isEmpty()) return Mono.empty();
 
         return webClient.get()
@@ -83,7 +83,7 @@ public class ChatWebSocketHandler implements WebSocketHandler {
                 .retrieve()
                 .bodyToMono(String.class)
                 .flatMap(senderUsername -> {
-                    BroadcastMessage broadcastMessage = new BroadcastMessage(
+                    MessageResponseDTO messageResponse = new MessageResponseDTO(
                             message.getId(),
                             message.getRoomId(),
                             message.getSenderId(),
@@ -95,7 +95,7 @@ public class ChatWebSocketHandler implements WebSocketHandler {
                     return Flux.fromIterable(sessions)
                             .flatMap(s -> {
                                 try {
-                                    String json = objectMapper.writeValueAsString(broadcastMessage);
+                                    String json = objectMapper.writeValueAsString(messageResponse);
                                     return s.send(Mono.just(s.textMessage(json)))
                                             .onErrorResume(e -> {
                                                 log.error("Failed to send message to session {}", s.getId(), e);

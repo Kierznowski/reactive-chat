@@ -1,6 +1,6 @@
 package com.example.auth_server.DTO;
 
-public record RegisterRequest(
+public record RegisterUserRequest(
         String email,
         String password,
         String username) {

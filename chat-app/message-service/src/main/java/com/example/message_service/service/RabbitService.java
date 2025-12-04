@@ -1,7 +1,7 @@
 package com.example.message_service.service;
 
-import com.example.message_service.DTO.IncomingMessage;
-import com.example.message_service.model.Message;
+import com.example.message_service.DTO.IncomingMessageEvent;
+import com.example.message_service.DTO.RegisteredMessageEvent;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.rabbitmq.client.ConnectionFactory;
@@ -32,7 +32,7 @@ public class RabbitService {
         receiver.consumeAutoAck("chat.messages")
                 .map(delivery -> {
                     try {
-                        return objectMapper.readValue(delivery.getBody(), IncomingMessage.class);
+                        return objectMapper.readValue(delivery.getBody(), IncomingMessageEvent.class);
                     } catch (IOException e) {
                         throw new RuntimeException(e);
                     }
@@ -44,7 +44,7 @@ public class RabbitService {
                 .subscribe();
     }
 
-    Mono<byte[]> transformToBytes(Message message) {
+    Mono<byte[]> transformToBytes(RegisteredMessageEvent message) {
         try {
             byte[] msgData = objectMapper.writeValueAsBytes(message);
             return Mono.just(msgData);
@@ -71,13 +71,13 @@ public class RabbitService {
             return sender.send(Mono.just(msg)).thenReturn(message);
     }
 
-    private Mono<Message> registerMessage(IncomingMessage message) {
-        Message registeredMessage = new Message();
+    private Mono<RegisteredMessageEvent> registerMessage(IncomingMessageEvent message) {
+        RegisteredMessageEvent registeredMessage = new RegisteredMessageEvent();
         registeredMessage.setId(UUID.randomUUID().toString());
-        registeredMessage.setType(message.getType());
-        registeredMessage.setRoomId(message.getRoomId());
-        registeredMessage.setSenderId(message.getSenderId());
-        registeredMessage.setContent(message.getContent());
+        registeredMessage.setType(message.type());
+        registeredMessage.setRoomId(message.roomId());
+        registeredMessage.setSenderId(message.senderId());
+        registeredMessage.setContent(message.content());
         registeredMessage.setCreatedAt(Instant.now());
 
         return Mono.just(registeredMessage);

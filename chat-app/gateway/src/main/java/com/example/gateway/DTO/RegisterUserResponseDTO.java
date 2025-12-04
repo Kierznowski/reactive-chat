@@ -1,8 +1,6 @@
 package com.example.gateway.DTO;
 
-import org.springframework.http.HttpStatus;
-
-public record RegisterResponse(
+public record RegisterUserResponseDTO(
         boolean success,
         String message
 )

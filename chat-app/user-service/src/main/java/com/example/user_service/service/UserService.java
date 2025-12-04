@@ -1,9 +1,6 @@
 package com.example.user_service.service;
 
-import com.example.user_service.DTO.RegisterRequest;
-import com.example.user_service.DTO.UserAuthDTO;
-import com.example.user_service.DTO.UserDTO;
-import com.example.user_service.mapper.UserMapper;
+import com.example.user_service.DTO.RegisterUserRequestDTO;
 import com.example.user_service.model.User;
 import com.example.user_service.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
@@ -20,9 +17,8 @@ public class UserService {
 
     private final UserRepository repository;
     private final PasswordEncoder encoder;
-    private final UserMapper mapper;
 
-    public UserDTO registerUser(RegisterRequest request) {
+    public User registerUser(RegisterUserRequestDTO request) {
         User user = new User();
         user.setId(UUID.randomUUID());
         user.setEmail(request.email());
@@ -31,17 +27,15 @@ public class UserService {
         user.setEnabled(true);
         user.setCreated_at(Instant.now());
 
-        User savedUser = repository.save(user);
-
-        return mapper.toUserDTO(savedUser);
+        return repository.save(user);
     }
 
-    public Optional<UserAuthDTO> getAuthUserByUsername(String username) {
-        return repository.findByUsername(username).map(mapper::toUserAuthDTO);
+    public Optional<User> getAuthUserByUsername(String username) {
+        return repository.findByUsername(username);
     }
 
-    public Optional<UserAuthDTO> getAuthUserByEmail(String email) {
-        return repository.findByEmail(email).map(mapper::toUserAuthDTO);
+    public Optional<User> getAuthUserByEmail(String email) {
+        return repository.findByEmail(email);
     }
 
     public Optional<String> getUsernameByUserId(String userId) {

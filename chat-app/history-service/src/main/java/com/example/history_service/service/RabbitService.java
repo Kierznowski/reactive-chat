@@ -1,7 +1,7 @@
 package com.example.history_service.service;
 
+import com.example.history_service.DTO.PersistMessageEvent;
 import com.example.history_service.mapper.MessageMapper;
-import com.example.history_service.model.MessageEntity;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.annotation.PreDestroy;
 import lombok.extern.slf4j.Slf4j;
@@ -20,6 +20,7 @@ public class RabbitService {
     private final Receiver receiver;
     private final ObjectMapper objectMapper;
     private final HistoryService historyService;
+    private final MessageMapper messageMapper;
 
     private Disposable subscription;
 
@@ -29,6 +30,7 @@ public class RabbitService {
                          Receiver receiver) {
         this.receiver = receiver;
         this.objectMapper = objectMapper;
+        this.messageMapper = messageMapper;
         this.historyService = historyService;
 
         startConsumer();
@@ -39,12 +41,14 @@ public class RabbitService {
         subscription = receiver.consumeAutoAck("persist.message")
                 .map(delivery -> {
                     try {
-                        return objectMapper.readValue(delivery.getBody(), MessageEntity.class);
+                        return objectMapper.readValue(delivery.getBody(), PersistMessageEvent.class);
                     } catch (IOException e) {
                         throw new RuntimeException(e);
                     }
                 })
+                .map(messageMapper::toEntity)
                 .flatMap(historyService::persistMessage)
+                .doOnNext(message -> System.out.println(message.getId()))
                 .doOnError(e -> log.error("Rabbit error: {}", e.getMessage()))
                 .retryWhen(Retry.backoff(10, Duration.ofSeconds(1)))
                 .subscribe(

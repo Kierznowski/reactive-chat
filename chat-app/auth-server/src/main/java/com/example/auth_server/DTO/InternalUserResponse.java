@@ -3,7 +3,7 @@ package com.example.auth_server.DTO;
 import java.util.Set;
 import java.util.UUID;
 
-public record UserAuthDTO(
+public record InternalUserResponse(
         UUID id,
         String username,
         String email,

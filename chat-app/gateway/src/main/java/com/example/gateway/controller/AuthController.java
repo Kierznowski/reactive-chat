@@ -1,6 +1,6 @@
 package com.example.gateway.controller;
 
-import com.example.gateway.DTO.RegisterRequest;
+import com.example.gateway.DTO.RegisterUserRequestDTO;
 import com.example.gateway.service.AuthService;
 import com.example.gateway.service.UserService;
 import lombok.RequiredArgsConstructor;
@@ -43,7 +43,7 @@ public class AuthController {
     }
 
     @PostMapping(path = "/register", consumes = MediaType.APPLICATION_JSON_VALUE)
-    public Mono<ResponseEntity<Map<String, Object>>> registerAccount(@RequestBody RegisterRequest request) {
+    public Mono<ResponseEntity<Map<String, Object>>> registerAccount(@RequestBody RegisterUserRequestDTO request) {
 
         log.info("Email: {}, password: {}, username: {}", request.email(), request.password(), request.username());
         return authService.registerAccount(request)

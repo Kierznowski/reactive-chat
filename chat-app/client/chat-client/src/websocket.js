@@ -12,6 +12,7 @@ export function connect(userId, roomId, onMessage) {
             senderId: userId,
             roomId: roomId
         }));
+        console.log("Joined userid", userId)
     };
 
     socket.onmessage = event => {
@@ -32,6 +33,7 @@ export function sendMessage(userId, roomId, content) {
         senderId: userId,
         content: content
     }));
+    console.log("set userid: " + userId);
 }
 
 export function closeSocket() {
