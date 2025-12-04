@@ -11,6 +11,7 @@ import reactor.core.publisher.Mono;
 import reactor.rabbitmq.*;
 
 import java.io.IOException;
+import java.time.Instant;
 import java.util.UUID;
 
 @Service
@@ -77,7 +78,7 @@ public class RabbitService {
         registeredMessage.setRoomId(message.getRoomId());
         registeredMessage.setSenderId(message.getSenderId());
         registeredMessage.setContent(message.getContent());
-        registeredMessage.setCreatedAt();
+        registeredMessage.setCreatedAt(Instant.now());
 
         return Mono.just(registeredMessage);
     }

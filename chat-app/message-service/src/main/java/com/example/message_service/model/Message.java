@@ -16,8 +16,4 @@ public class Message {
     private UUID senderId;
     private String content;
     private Instant createdAt;
-
-    public void setCreatedAt() {
-        createdAt = Instant.now();
-    }
 }

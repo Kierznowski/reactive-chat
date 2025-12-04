@@ -1,11 +1,15 @@
 import { useState } from "react";
 import "./../styles/Register.css";
+import { useNavigate } from "react-router-dom";
 
 export default function Register() {
     
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [username, setUsername] = useState("");
+    const [registered, setRegistered] = useState(false);
+
+    const navigate = useNavigate();
 
     async function createAccount() {
         try {
@@ -18,19 +22,34 @@ export default function Register() {
                     "email": email,
                     "password": password,
                     "username": username
-                })
+                }),
             });
 
             if(!response.ok) {
                 throw new Error(`Response status: ${response.status}`);
             }
+            setRegistered(true);
+            startRedirection();
         } catch (error) {
             console.log(error);
         }
     }
 
+    function startRedirection() {
+        setTimeout(() => navigate('/'), 2000);
+    }
+
     return (
+        registered ?
         <div className="registration-container">
+            <div className="registered-info">
+                You are successfully registered! :)
+            </div>
+        </div>
+        :
+        <div className="registration-container">
+
+
             <div className="register-title">
                 Create new account
             </div>

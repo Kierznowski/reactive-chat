@@ -26,7 +26,6 @@ export default function ChatRoom() {
               window.location.href = "http://localhost:9000/oauth2/authorization/chat_auth_server";
             return;
           }
-
           const data = await res.json();
           console.log("Fetched history: " + data);
           setMessages(Array.isArray(data) ? data : []);

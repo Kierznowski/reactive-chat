@@ -3,6 +3,7 @@ package com.example.history_service.model;
 
 import com.example.common.model.MessageType;
 import lombok.AllArgsConstructor;
+import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
@@ -12,7 +13,7 @@ import java.time.Instant;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
-@Getter
+@Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Document

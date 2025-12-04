@@ -47,7 +47,9 @@ public class RabbitService {
                 .flatMap(historyService::persistMessage)
                 .doOnError(e -> log.error("Rabbit error: {}", e.getMessage()))
                 .retryWhen(Retry.backoff(10, Duration.ofSeconds(1)))
-                .subscribe(msg -> log.info("Persisted message {}", msg.getId()));
+                .subscribe(
+                        msg -> log.info("Persisted message {}", msg.getId()),
+                        err -> log.error("Error during persist: ", err));
     }
 
 
