@@ -27,7 +27,7 @@ public class Room {
     UUID ownerId;
 
     @ElementCollection
-    @CollectionTable(name = "room_member", joinColumns = @JoinColumn(name = "roomId"))
+    @CollectionTable(name = "room_member", joinColumns = @JoinColumn(name = "room_id"))
     @Column(name = "member_id")
     private List<UUID> members = new ArrayList<>();
 

@@ -1,20 +1,16 @@
-package com.example.common.model;
+package com.example.message_service.DTO;
 
-import lombok.Data;
+import com.example.common.model.MessageType;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 
-import java.time.Instant;
 import java.util.UUID;
 
 @Getter
-@Data
 @RequiredArgsConstructor
-public class ChatMessage {
-    private String id;
+public class IncomingMessage {
     private MessageType type;
     private Long roomId;
     private UUID senderId;
     private String content;
-    private Instant createdAt;
 }

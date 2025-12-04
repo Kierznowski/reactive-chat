@@ -1,11 +1,15 @@
 package com.example.gateway.websocket;
 
 import com.example.common.model.ChatMessage;
+import com.example.gateway.DTO.BroadcastMessage;
+import com.example.gateway.DTO.ReceivedMessage;
 import com.example.gateway.rabbit.RabbitService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.annotation.PostConstruct;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
+import org.springframework.web.reactive.function.client.WebClient;
 import org.springframework.web.reactive.socket.WebSocketHandler;
 import org.springframework.web.reactive.socket.WebSocketMessage;
 import org.springframework.web.reactive.socket.WebSocketSession;
@@ -21,14 +25,16 @@ public class ChatWebSocketHandler implements WebSocketHandler {
     private final RabbitService rabbitService;
     private final SessionRegistry sessionRegistry;
     private final ObjectMapper objectMapper;
+    private final WebClient webClient;
 
-    public ChatWebSocketHandler(RabbitService rabbitService,
-                                SessionRegistry sessionRegistry,
-                                ObjectMapper objectMapper) {
+    public ChatWebSocketHandler(RabbitService rabbitService, SessionRegistry sessionRegistry,
+                                ObjectMapper objectMapper,  @Qualifier("userServiceWebClient") WebClient webClient) {
         this.rabbitService = rabbitService;
         this.sessionRegistry = sessionRegistry;
+        this.webClient = webClient;
         this.objectMapper = objectMapper;
     }
+
 
     @PostConstruct
     public void init() {
@@ -48,20 +54,20 @@ public class ChatWebSocketHandler implements WebSocketHandler {
                 .doFinally(sig -> sessionRegistry.removeSession(session));
     }
 
-    private Mono<ChatMessage> safeParse(String json) {
+    private Mono<ReceivedMessage> safeParse(String json) {
         try {
-            return Mono.just(objectMapper.readValue(json, ChatMessage.class));
+            return Mono.just(objectMapper.readValue(json, ReceivedMessage.class));
         } catch (Exception e) {
             return Mono.empty();
         }
     }
 
-    private Mono<Void> handleIncomingMessage(WebSocketSession session, ChatMessage message) {
-        return switch (message.getType()) {
-            case MESSAGE -> rabbitService.sendMessage(message);
+    private Mono<Void> handleIncomingMessage(WebSocketSession session, ReceivedMessage message) {
+        return switch (message.type()) {
+            case MESSAGE -> rabbitService.sendMessageToProcess(message);
             case JOIN -> {
-                sessionRegistry.addUser(message.getSenderId(), session);
-                sessionRegistry.joinRoom(message.getRoomId(), session);
+                sessionRegistry.addUser(message.senderId(), session);
+                sessionRegistry.joinRoom(message.roomId(), session);
                 yield Mono.empty();
             }
             default -> Mono.empty();
@@ -72,15 +78,39 @@ public class ChatWebSocketHandler implements WebSocketHandler {
         Set<WebSocketSession> sessions = sessionRegistry.getSessionsInRoom(message.getRoomId());
         if(sessions == null || sessions.isEmpty()) return Mono.empty();
 
-        return Flux.fromIterable(sessions)
-                .flatMap(s -> {
-                    try {
-                        String json = objectMapper.writeValueAsString(message);
-                        return s.send(Mono.just(s.textMessage(json)))
-                                .onErrorResume(e -> Mono.empty());
-                    } catch (Exception e) {
-                        return Mono.empty();
-                    }
-                }).then();
+        return webClient.get()
+                .uri("/user/{userId}/username", message.getSenderId())
+                .retrieve()
+                .bodyToMono(String.class)
+                .flatMap(senderUsername -> {
+                    BroadcastMessage broadcastMessage = new BroadcastMessage(
+                            message.getId(),
+                            message.getRoomId(),
+                            message.getSenderId(),
+                            senderUsername,
+                            message.getContent(),
+                            message.getCreatedAt()
+                    );
+
+                    return Flux.fromIterable(sessions)
+                            .flatMap(s -> {
+                                try {
+                                    String json = objectMapper.writeValueAsString(broadcastMessage);
+                                    return s.send(Mono.just(s.textMessage(json)))
+                                            .onErrorResume(e -> {
+                                                log.error("Failed to send message to session {}", s.getId(), e);
+                                                return Mono.empty();
+                                            });
+                                } catch (Exception e) {
+                                    log.error("Failed to serialize message", e);
+                                    return Mono.empty();
+                                }
+                            })
+                            .then();
+                })
+                .onErrorResume(e -> {
+                    log.error("Failed to fetch username for user {}", message.getSenderId());
+                    return Mono.empty();
+                });
     }
 }

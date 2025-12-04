@@ -27,7 +27,7 @@ public class WebClientConfig {
     @Qualifier("userWebClient")
     public WebClient userServiceWebClient(WebClient.Builder builder) {
         return builder
-                .baseUrl("http://localhost:9300")
+                .baseUrl("http://localhost:9400")
                 .build();
     }
 

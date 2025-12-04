@@ -26,8 +26,13 @@ public class RoomController {
     }
 
     @GetMapping("/by-user/{userId}")
-    public List<RoomDTO> getByUser(@PathVariable String userId) {
-        return service.getRoomsForUser(UUID.fromString(userId));
+    public ResponseEntity<List<RoomDTO>> getByUser(@PathVariable("userId") String userId) {
+        UUID uuid = UUID.fromString(userId);
+        List<RoomDTO> rooms = service.getRoomsForUser(uuid);
+        if(rooms.isEmpty()) {
+            return ResponseEntity.noContent().build();
+        }
+        return ResponseEntity.ok(rooms);
     }
 
     @GetMapping("/{roomId}")

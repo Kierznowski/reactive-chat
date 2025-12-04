@@ -26,11 +26,11 @@ public class RoomsController {
     @GetMapping
     public Flux<RoomDTO> getUserRooms(@AuthenticationPrincipal OAuth2User user,
                                       @RegisteredOAuth2AuthorizedClient("chat_auth_server") OAuth2AuthorizedClient client) {
-        String email = user.getName();
+        String userId = user.getAttribute("sub");
         String token = client.getAccessToken().getTokenValue();
 
         return webClient.get()
-                .uri("http://localhost:9300/users/{email}/rooms", email)
+                .uri("http://localhost:9300/rooms/by-user/{userId}", userId)
                 .headers(headers -> headers.setBearerAuth(token))
                 .retrieve()
                 .bodyToFlux(RoomDTO.class);
@@ -40,8 +40,9 @@ public class RoomsController {
     public Mono<RoomDTO> createRoom(@AuthenticationPrincipal OAuth2User user,
                                     @RegisteredOAuth2AuthorizedClient("chat_auth_server") OAuth2AuthorizedClient client,
                                     @PathVariable("roomName") String roomName) {
-        CreateRoomRequest request = new CreateRoomRequest(roomName, user.getName());
+        CreateRoomRequest request = new CreateRoomRequest(roomName, user.getAttribute("sub"));
 
+        System.out.println("ATTRIBUTES: " + user.getAttributes());
         return webClient.post()
                 .uri("http://localhost:9300/rooms")
                 .headers(h -> h.setBearerAuth(client.getAccessToken().getTokenValue()))
@@ -51,6 +52,7 @@ public class RoomsController {
                         r.bodyToMono(String.class)
                                 .flatMap(body -> Mono.error(new RuntimeException("Create room error: " + body)))
                 )
-                .bodyToMono(RoomDTO.class);
+                .bodyToMono(RoomDTO.class)
+                .doOnNext(room -> System.out.println(room.name()));
     }
 }

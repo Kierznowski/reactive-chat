@@ -1,15 +1,15 @@
 package com.example.gateway.DTO;
 
-import lombok.Getter;
 import org.springframework.security.core.userdetails.User;
 
 import java.util.List;
+import java.util.UUID;
 
-@Getter
-public class RoomDTO {
-    Long id;
-    String name;
-    Long ownerId;
-    List<User> memberIds;
-}
+public record RoomDTO(
+        Long id,
+        String name,
+        UUID ownerId,
+        List<User> memberIds
+)
+{}
 

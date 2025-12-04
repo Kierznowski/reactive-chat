@@ -1,6 +1,7 @@
 package com.example.gateway.rabbit;
 
 import com.example.common.model.ChatMessage;
+import com.example.gateway.DTO.ReceivedMessage;
 import com.example.gateway.websocket.SessionRegistry;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -48,9 +49,9 @@ public class RabbitService {
         return processedMessageStream;
     }
 
-    public Mono<Void> sendMessage(ChatMessage chatMessage) {
+    public Mono<Void> sendMessageToProcess(ReceivedMessage receivedMessage) {
         try {
-            byte[] body = objectMapper.writeValueAsBytes(chatMessage);
+            byte[] body = objectMapper.writeValueAsBytes(receivedMessage);
 
             OutboundMessage msg = new OutboundMessage(
                     "",

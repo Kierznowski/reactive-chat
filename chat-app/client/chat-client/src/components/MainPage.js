@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
 let userName = "";
+let userId = "";
 
 export default function MainPage() {
   const [auth, setAuth] = useState(null);
@@ -14,6 +15,8 @@ export default function MainPage() {
       console.log("Auth:", data);
       setAuth(data.authenticated);
       userName = data.username;
+      userId = data.userid;
+      console.log(data);
     });
   }, []);
   
@@ -35,7 +38,7 @@ export default function MainPage() {
   return auth ? 
     (
         <div id='main-container'>
-            <RoomList username={userName} />
+            <RoomList username={userName} userId={userId} />
         </div>
     ) :
     (
