@@ -1,7 +1,7 @@
 package com.example.auth_server.controller;
 
-import com.example.auth_server.DTO.RegisterRequest;
-import com.example.auth_server.DTO.UserDTO;
+import com.example.auth_server.DTO.RegisterUserRequest;
+import com.example.auth_server.DTO.RegisterUserResponse;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
@@ -21,13 +21,13 @@ public class RegisterController {
     private final WebClient webClient;
 
     @PostMapping
-    public ResponseEntity<?> register(@RequestBody RegisterRequest request) {
+    public ResponseEntity<?> register(@RequestBody RegisterUserRequest request) {
 
-        UserDTO result = webClient.post()
+        RegisterUserResponse result = webClient.post()
                 .uri("http://localhost:9400/auth/register")
                 .bodyValue(request)
                 .retrieve()
-                .bodyToMono(UserDTO.class)
+                .bodyToMono(RegisterUserResponse.class)
                 .block();
 
         return ResponseEntity.ok(result);

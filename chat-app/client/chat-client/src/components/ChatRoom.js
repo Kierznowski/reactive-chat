@@ -27,7 +27,6 @@ export default function ChatRoom() {
             return;
           }
           const data = await res.json();
-          console.log("Fetched history: " + data);
           setMessages(Array.isArray(data) ? data : []);
         } catch (err) {
           console.error("Error fetching history", err);

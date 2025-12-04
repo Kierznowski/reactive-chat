@@ -1,7 +1,7 @@
 package com.example.gateway.rabbit;
 
-import com.example.common.model.ChatMessage;
-import com.example.gateway.DTO.ReceivedMessage;
+import com.example.gateway.DTO.OutcomingMessageEvent;
+import com.example.gateway.DTO.IncomingMessageEvent;
 import com.example.gateway.websocket.SessionRegistry;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -21,8 +21,7 @@ public class RabbitService {
     public final Receiver receiver;
     public final Sender sender;
     public final ObjectMapper objectMapper;
-
-    private final Flux<ChatMessage> processedMessageStream;
+    private final Flux<OutcomingMessageEvent> processedMessageStream;
 
 
     public RabbitService(ConnectionFactory connectionFactory,
@@ -37,7 +36,7 @@ public class RabbitService {
         this.processedMessageStream = receiver.consumeAutoAck("processed.message")
                 .map(delivery -> {
                     try {
-                        return objectMapper.readValue(delivery.getBody(), ChatMessage.class);
+                        return objectMapper.readValue(delivery.getBody(), OutcomingMessageEvent.class);
                     } catch (IOException e) {
                         throw new RuntimeException(e);
                     }
@@ -45,11 +44,11 @@ public class RabbitService {
                 .share();
     }
 
-    public Flux<ChatMessage> listenForMessageToResend() {
+    public Flux<OutcomingMessageEvent> listenForMessageToResend() {
         return processedMessageStream;
     }
 
-    public Mono<Void> sendMessageToProcess(ReceivedMessage receivedMessage) {
+    public Mono<Void> sendMessageToProcess(IncomingMessageEvent receivedMessage) {
         try {
             byte[] body = objectMapper.writeValueAsBytes(receivedMessage);
 

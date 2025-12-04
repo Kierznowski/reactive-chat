@@ -1,9 +1,7 @@
 package com.example.user_service.DTO;
 
-import java.util.UUID;
-
-public record UserDTO(
-        UUID id,
+public record UserResponseDTO(
+        String id,
         String email,
         String username
 ) {

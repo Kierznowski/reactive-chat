@@ -1,6 +1,6 @@
 package com.example.auth_server.service;
 
-import com.example.auth_server.DTO.UserAuthDTO;
+import com.example.auth_server.DTO.InternalUserResponse;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.userdetails.User;
@@ -25,10 +25,10 @@ public class ChatUserDetailsService implements UserDetailsService {
         log.info("Loading user by username: {}", username);
 
 
-        UserAuthDTO user = webClient.get()
+        InternalUserResponse user = webClient.get()
                 .uri("http://localhost:9400/internal/users/by-username/{username}", username)
                 .retrieve()
-                .bodyToMono(UserAuthDTO.class)
+                .bodyToMono(InternalUserResponse.class)
                 .block();
 
         if(user == null) {
@@ -43,10 +43,10 @@ public class ChatUserDetailsService implements UserDetailsService {
     }
 
     public UUID fetchUserIdFromUserService(String username) {
-        UserAuthDTO user = webClient.get()
+        InternalUserResponse user = webClient.get()
                 .uri("http://localhost:9400/internal/users/by-username/{username}", username)
                 .retrieve()
-                .bodyToMono(UserAuthDTO.class)
+                .bodyToMono(InternalUserResponse.class)
                 .block();
 
         return user.id();

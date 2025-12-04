@@ -12,9 +12,9 @@ import java.util.concurrent.ConcurrentHashMap;
 public class SessionRegistry {
 
     private Map<String, WebSocketSession> users = new ConcurrentHashMap<>();
-    private Map<Long, Set<WebSocketSession>> rooms = new ConcurrentHashMap<>();
+    private Map<String, Set<WebSocketSession>> rooms = new ConcurrentHashMap<>();
     private Map<WebSocketSession, String> sessionUser = new ConcurrentHashMap<>();
-    private Map<WebSocketSession, Long> sessionRoom = new ConcurrentHashMap<>();
+    private Map<WebSocketSession, String> sessionRoom = new ConcurrentHashMap<>();
 
     public void addUser(String userId, WebSocketSession webSocketSession) {
         WebSocketSession oldSession = users.get(userId);
@@ -26,18 +26,18 @@ public class SessionRegistry {
         sessionUser.put(webSocketSession, userId);
     }
 
-    public void joinRoom(Long roomId, WebSocketSession session) {
+    public void joinRoom(String roomId, WebSocketSession session) {
         rooms.computeIfAbsent(roomId, k -> ConcurrentHashMap.newKeySet()).add(session);
         sessionRoom.put(session, roomId);
     }
 
-    public Set<WebSocketSession> getSessionsInRoom(Long roomId) {
+    public Set<WebSocketSession> getSessionsInRoom(String roomId) {
         return rooms.getOrDefault(roomId, Collections.emptySet());
     }
 
     public void removeSession(WebSocketSession session) {
         String user = sessionUser.remove(session);
-        Long room = sessionRoom.remove(session);
+        String room = sessionRoom.remove(session);
         if (user != null) {
             users.remove(user);
         }

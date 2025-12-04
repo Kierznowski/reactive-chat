@@ -1,7 +1,7 @@
 package com.example.gateway.service;
 
-import com.example.gateway.DTO.RegisterRequest;
-import com.example.gateway.DTO.RegisterResponse;
+import com.example.gateway.DTO.RegisterUserRequestDTO;
+import com.example.gateway.DTO.RegisterUserResponseDTO;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
@@ -18,10 +18,10 @@ public class AuthService {
         this.webClient = authorizationServiceWebClient;
     }
 
-    public Mono<RegisterResponse> registerAccount(RegisterRequest request) {
+    public Mono<RegisterUserResponseDTO> registerAccount(RegisterUserRequestDTO request) {
         return webClient.post()
                 .uri("/auth/register")
-                .bodyValue(new RegisterRequest(
+                .bodyValue(new RegisterUserRequestDTO(
                         request.email(),
                         request.password(),
                         request.username()
@@ -29,7 +29,7 @@ public class AuthService {
                 .exchangeToMono(response -> {
                     if(response.statusCode().is2xxSuccessful()) {
                         return response.bodyToMono(String.class)
-                                .map(body -> new RegisterResponse(true, body));
+                                .map(body -> new RegisterUserResponseDTO(true, body));
                     } else {
                         return Mono.error(
                                 new RuntimeException("Registration failure: " + response.statusCode())
